@@ -1,5 +1,5 @@
 baseURL = "https://example.com/"
-title = "Debuginn"
+title = "Debug客栈 AI 工具站"
 theme = "hugo-theme-skills"
 defaultContentLanguage = "en"
 defaultContentLanguageInSubdir = false
