@@ -67,13 +67,6 @@
           <span></span>
           <span></span>
         </div>
-        <p class="card-path">$ pwd: ~/tools/{{ .Params.slug | default .Slug }}</p>
-        {{ with .Params.icon }}
-        <div class="tool-mark" aria-hidden="true">
-          <span class="tool-mark-badge">{{ . | safeHTML }}</span>
-          <span class="tool-mark-label">{{ .Title }}</span>
-        </div>
-        {{ end }}
         <p class="eyebrow">{{ with .Params.eyebrow }}{{ . }}{{ end }}</p>
         <p class="lead"><span>{{ .Summary }}</span></p>
         <div class="hero-actions">
