@@ -1,59 +1,176 @@
-[system_online] = "系统在线"
-[tools_available] = "{{ .Count }} 个工具可用"
-[nav_tools] = "工具"
-[nav_blog] = "博客"
-[nav_github] = "GitHub"
-[hero_title_prefix] = "Debug客栈"
-[hero_title_accent] = "工具与技能"
-[hero_desc] = "一套轻量级创意工具，用于生成分享海报和博客封面图。无需安装，打开即用。"
-[open_tool] = "$ 打开工具"
-[copyright] = "© 2026 Debuginn. All rights reserved."
-[built_with] = "由"
-[theme_label] = "主题"
-[switch_theme] = "切换主题"
-[switch_lang] = "切换语言"
-[lang_options] = "语言选项"
-[tools_tag] = "工具与技能"
-[footer_tools] = "工具"
-[footer_blog] = "博客"
-[footer_github] = "GitHub"
-[tool_overview] = "# > 工具简介"
-[tool_new] = "# > 新工具"
-[export_png] = "导出 PNG"
-[no_file] = "未选择文件"
-[center_logo] = "中心图标"
-[choose_logo_file] = "选择图标文件"
-[title_label] = "主标题"
-[accent_color] = "主题色"
-[glow_intensity] = "发光强度"
-[title_tracking] = "主标题字间距"
-[screenshot_image] = "截图图片"
-[choose_screenshot] = "选择截图文件"
-[size_ratio] = "尺寸比例"
-[bg_color] = "背景色"
-[gradient_scheme] = "标题配色方案"
-[subtitle_label] = "副标题"
-[apply_color] = "应用颜色"
-[eyedropper] = "拾色器"
-[hex_label] = "HEX"
-[close_label] = "关闭"
-[preset_colors] = "预设颜色"
-[choose_bg_color] = "选择背景色"
-[upload_screenshot] = "上传截图"
-[custom_color] = "自定义颜色"
-[blue_theme] = "蓝色主题"
-[violet_theme] = "紫色主题"
-[teal_theme] = "青绿色主题"
-[orange_theme] = "橙色主题"
-[white_bg] = "白色背景"
-[gray_bg] = "浅灰背景"
-[cream_bg] = "米色背景"
-[dark_bg] = "深色背景"
-[cool_scheme] = "冷色炫彩"
-[warm_scheme] = "暖色炫彩"
-[ocean_scheme] = "海蓝渐变"
-[mono_scheme] = "深色单色"
-[wechat_size] = "1:1 微信"
-[xhs_size] = "3:4 小红书"
-[panel_config] = "$ config: /builder/"
-[preview_label] = "$ preview: live-canvas"
+[system_online]
+other = "系统在线"
+
+[tools_available]
+other = "{{ .Count }} 个工具可用"
+
+[nav_tools]
+other = "工具"
+
+[nav_blog]
+other = "博客"
+
+[nav_github]
+other = "GitHub"
+
+[hero_title_prefix]
+other = "Debug客栈"
+
+[hero_title_accent]
+other = "工具与技能"
+
+[hero_desc]
+other = "一套轻量级创意工具，用于生成分享海报和博客封面图。无需安装，打开即用。"
+
+[open_tool]
+other = "$ 打开工具"
+
+[copyright]
+other = "© 2026 Debuginn. All rights reserved."
+
+[built_with]
+other = "由"
+
+[theme_label]
+other = "主题"
+
+[switch_theme]
+other = "切换主题"
+
+[switch_lang]
+other = "切换语言"
+
+[lang_options]
+other = "语言选项"
+
+[tools_tag]
+other = "工具与技能"
+
+[footer_tools]
+other = "工具"
+
+[footer_blog]
+other = "博客"
+
+[footer_github]
+other = "GitHub"
+
+[tool_overview]
+other = "# > 工具简介"
+
+[tool_new]
+other = "# > 新工具"
+
+[export_png]
+other = "导出 PNG"
+
+[no_file]
+other = "未选择文件"
+
+[center_logo]
+other = "中心图标"
+
+[choose_logo_file]
+other = "选择图标文件"
+
+[title_label]
+other = "主标题"
+
+[accent_color]
+other = "主题色"
+
+[glow_intensity]
+other = "发光强度"
+
+[title_tracking]
+other = "主标题字间距"
+
+[screenshot_image]
+other = "截图图片"
+
+[choose_screenshot]
+other = "选择截图文件"
+
+[size_ratio]
+other = "尺寸比例"
+
+[bg_color]
+other = "背景色"
+
+[gradient_scheme]
+other = "标题配色方案"
+
+[subtitle_label]
+other = "副标题"
+
+[apply_color]
+other = "应用颜色"
+
+[eyedropper]
+other = "拾色器"
+
+[hex_label]
+other = "HEX"
+
+[close_label]
+other = "关闭"
+
+[preset_colors]
+other = "预设颜色"
+
+[choose_bg_color]
+other = "选择背景色"
+
+[upload_screenshot]
+other = "上传截图"
+
+[custom_color]
+other = "自定义颜色"
+
+[blue_theme]
+other = "蓝色主题"
+
+[violet_theme]
+other = "紫色主题"
+
+[teal_theme]
+other = "青绿色主题"
+
+[orange_theme]
+other = "橙色主题"
+
+[white_bg]
+other = "白色背景"
+
+[gray_bg]
+other = "浅灰背景"
+
+[cream_bg]
+other = "米色背景"
+
+[dark_bg]
+other = "深色背景"
+
+[cool_scheme]
+other = "冷色炫彩"
+
+[warm_scheme]
+other = "暖色炫彩"
+
+[ocean_scheme]
+other = "海蓝渐变"
+
+[mono_scheme]
+other = "深色单色"
+
+[wechat_size]
+other = "1:1 微信"
+
+[xhs_size]
+other = "3:4 小红书"
+
+[panel_config]
+other = "$ config: /builder/"
+
+[preview_label]
+other = "$ preview: live-canvas"
