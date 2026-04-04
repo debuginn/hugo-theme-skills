@@ -74,7 +74,7 @@
           <span class="tool-mark-label">{{ .Title }}</span>
         </div>
         {{ end }}
-        <p class="eyebrow">{{ with .Params.eyebrow }}{{ . }}{{ else }}{{ i18n "tool_overview" }}{{ end }}</p>
+        <p class="eyebrow">{{ with .Params.eyebrow }}{{ . }}{{ end }}</p>
         <p class="lead"><span>{{ .Summary }}</span></p>
         <div class="hero-actions">
           <a class="btn btn-solid" href="{{ .RelPermalink }}">{{ i18n "open_tool" }}</a>

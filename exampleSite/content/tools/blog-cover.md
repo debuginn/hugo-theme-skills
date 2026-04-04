@@ -1,7 +1,6 @@
 ---
 title: "Blog Cover Generator"
 slug: "debuginn-blog-cover"
-eyebrow: "# > New Tool"
 desc: "Upload a logo, edit the title, then generate a glowing blog hero cover in seconds."
 toolType: "blog-cover"
 toolCSS: "/css/blog-cover.css"

@@ -1,7 +1,6 @@
 ---
 title: "Xiaohongshu & WeChat Share Poster"
 slug: "debuginn-wx-xhs-poster"
-eyebrow: "# > Tool Overview"
 desc: "Upload a screenshot, edit the copy, adjust the background and title colors, preview in real time, and export a square share image."
 toolType: "wx-xhs-poster"
 toolCSS: "/css/wx-xhs-poster.css"
