@@ -11,7 +11,8 @@
 {{- $themeName := .Site.Params.themeName | default "hugo-theme-skills" -}}
 {{- $themeURL := .Site.Params.themeURL | default "https://github.com/debuginn/hugo-theme-skills" -}}
 <footer class="footer">
-  <div class="footer-card">
+  <div class="container">
+    <div class="footer-card">
     <div class="footer-main">
       <div class="footer-brand-col">
         <a class="logo footer-brand-wrap" href="{{ $homeURL }}">
@@ -54,6 +55,7 @@
         <p>{{ $copyright }}</p>
         <p class="footer-credit">{{ i18n "built_with" }} <a href="{{ $blogURL }}" target="_blank" rel="noopener">Debuginn</a>. {{ i18n "theme_label" }} <a href="{{ $themeURL }}" target="_blank" rel="noopener">{{ $themeName }}</a>.</p>
       </div>
+    </div>
     </div>
   </div>
 </footer>

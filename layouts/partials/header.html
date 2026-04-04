@@ -8,7 +8,7 @@
 {{- $otherLangLabel := cond $isZh "EN" "中文" -}}
 {{- $currentLangLabel := cond $isZh "中文" "EN" -}}
 <header class="topbar">
-  <div class="nav-shell">
+  <div class="container nav-shell">
     <nav class="top-pill">
       <div class="pill-left">
         <a class="logo" href="{{ $homeURL }}" aria-label="{{ .Site.Title }}">

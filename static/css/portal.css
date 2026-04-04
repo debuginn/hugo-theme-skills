@@ -1,6 +1,6 @@
 :root {
   color-scheme: light;
-  --content-w: 1120px;
+  --content-w: 1240px;
   --bg: #f4f9ff;
   --bg-2: #edf4ff;
   --text: #14243a;
@@ -105,6 +105,11 @@ button {
   position: absolute;
   width: 0;
   height: 0;
+}
+
+.container {
+  width: min(var(--content-w), calc(100% - 64px));
+  margin: 0 auto;
 }
 
 .site {
@@ -1268,8 +1273,9 @@ html[data-theme="light"] .tool-mark-badge {
 }
 
 @media (max-width: 720px) {
+  .container,
   .site {
-    width: min(var(--content-w), calc(100% - 20px));
+    width: min(var(--content-w), calc(100% - 36px));
   }
 
   .top-pill {
