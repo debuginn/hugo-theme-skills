@@ -1,66 +1,172 @@
 const THEME_KEY = "debuginn_tools_theme";
+const THEME_PREFS = ["auto", "dark", "light"];
+
+function detectTheme() {
+  return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
+    ? "dark"
+    : "light";
+}
 
 function applyTheme(theme) {
   document.documentElement.setAttribute("data-theme", theme);
 }
 
-function updateThemeButton(theme) {
-  const btn = document.getElementById("themeToggleBtn");
-  if (!btn) return;
-  btn.setAttribute("aria-label", theme === "dark" ? "Switch to light theme" : "Switch to dark theme");
+function applyThemePref(pref) {
+  applyTheme(pref === "auto" ? detectTheme() : pref);
 }
 
-function bindLangDropdown() {
-  const dropdown = document.querySelector(".header-lang-dropdown");
-  const trigger = document.getElementById("langToggleBtn");
-  const options = document.querySelectorAll("[data-lang-href]");
-  if (!dropdown || !trigger) return;
+function readThemePref() {
+  try {
+    const v = localStorage.getItem(THEME_KEY);
+    return THEME_PREFS.includes(v) ? v : "auto";
+  } catch (_) {
+    return "auto";
+  }
+}
 
-  const close = () => {
-    dropdown.classList.remove("open");
-    trigger.setAttribute("aria-expanded", "false");
-  };
+function nextThemePref(pref) {
+  const idx = THEME_PREFS.indexOf(pref);
+  return THEME_PREFS[(idx + 1) % THEME_PREFS.length];
+}
 
-  trigger.addEventListener("click", (event) => {
-    event.stopPropagation();
-    const nextOpen = !dropdown.classList.contains("open");
-    dropdown.classList.toggle("open", nextOpen);
-    trigger.setAttribute("aria-expanded", nextOpen ? "true" : "false");
+function updateThemeButton(pref, btn) {
+  if (!btn) return;
+  btn.textContent = pref === "auto" ? "◐" : pref === "dark" ? "☾" : "☀";
+  btn.setAttribute("aria-label", pref === "auto" ? "Theme: Auto" : pref === "dark" ? "Theme: Dark" : "Theme: Light");
+}
+
+function closeLangDropdown(dropdown) {
+  dropdown.classList.remove("open");
+  const trigger = dropdown.querySelector("button[aria-expanded]");
+  if (trigger) trigger.setAttribute("aria-expanded", "false");
+}
+
+function closeLangDropdowns(exceptTarget) {
+  document.querySelectorAll(".header-lang-dropdown.open, .footer-lang-dropdown.open").forEach((dropdown) => {
+    if (exceptTarget && dropdown.contains(exceptTarget)) return;
+    closeLangDropdown(dropdown);
   });
+}
 
-  options.forEach((option) => {
-    option.addEventListener("click", () => {
-      const href = option.getAttribute("data-lang-href");
-      if (href) window.location.href = href;
+function bindLangDropdown(dropdownSel, triggerSel, optionAttr) {
+  document.querySelectorAll(dropdownSel).forEach((dropdown) => {
+    const trigger = dropdown.querySelector(triggerSel);
+    const options = dropdown.querySelectorAll(`[${optionAttr}]`);
+    if (!trigger) return;
+
+    trigger.addEventListener("click", (e) => {
+      e.stopPropagation();
+      closeLangDropdowns(e.target instanceof Element ? e.target : null);
+      const nextOpen = !dropdown.classList.contains("open");
+      dropdown.classList.toggle("open", nextOpen);
+      trigger.setAttribute("aria-expanded", nextOpen ? "true" : "false");
+    });
+
+    options.forEach((option) => {
+      option.addEventListener("click", () => {
+        const href = option.getAttribute(optionAttr);
+        if (href) window.location.href = href;
+      });
     });
   });
+}
 
-  document.addEventListener("click", (event) => {
-    if (event.target instanceof Element && event.target.closest(".header-lang-dropdown")) return;
-    close();
+function bindMobileMenu() {
+  const menuBtn = document.querySelector(".menu-btn");
+  const mobileMenu = document.getElementById("mobile-menu");
+  if (!menuBtn || !mobileMenu) return;
+
+  const closeMenu = () => {
+    mobileMenu.classList.remove("open");
+    mobileMenu.setAttribute("aria-hidden", "true");
+    menuBtn.setAttribute("aria-expanded", "false");
+  };
+
+  menuBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const isOpen = menuBtn.getAttribute("aria-expanded") === "true";
+    if (isOpen) {
+      closeMenu();
+    } else {
+      mobileMenu.classList.add("open");
+      mobileMenu.setAttribute("aria-hidden", "false");
+      menuBtn.setAttribute("aria-expanded", "true");
+    }
   });
 
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") close();
+  mobileMenu.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", closeMenu);
+  });
+
+  document.addEventListener("click", (e) => {
+    if (menuBtn.getAttribute("aria-expanded") !== "true") return;
+    if (mobileMenu.contains(e.target) || menuBtn.contains(e.target)) return;
+    closeMenu();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeMenu();
+  });
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 960) closeMenu();
   });
 }
 
 function init() {
-  const savedTheme = localStorage.getItem(THEME_KEY) || "dark";
-  const themeBtn = document.getElementById("themeToggleBtn");
+  let themePref = readThemePref();
+  const themeBtn = document.querySelector(".mode-btn");
 
-  applyTheme(savedTheme);
-  updateThemeButton(savedTheme);
-  bindLangDropdown();
+  applyThemePref(themePref);
+  updateThemeButton(themePref, themeBtn);
 
   if (themeBtn) {
     themeBtn.addEventListener("click", () => {
-      const nextTheme = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
-      localStorage.setItem(THEME_KEY, nextTheme);
-      applyTheme(nextTheme);
-      updateThemeButton(nextTheme);
+      themePref = nextThemePref(themePref);
+      try { localStorage.setItem(THEME_KEY, themePref); } catch (_) {}
+      applyThemePref(themePref);
+      updateThemeButton(themePref, themeBtn);
     });
   }
+
+  const darkMedia = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)");
+  if (darkMedia && typeof darkMedia.addEventListener === "function") {
+    darkMedia.addEventListener("change", () => {
+      if (themePref !== "auto") return;
+      applyThemePref("auto");
+    });
+  }
+
+  bindLangDropdown(".header-lang-dropdown", ".header-lang-trigger", "data-lang-href");
+  bindLangDropdown(".footer-lang-dropdown", ".footer-lang-trigger", "data-footer-lang-href");
+  bindMobileMenu();
+
+  document.addEventListener("click", (e) => {
+    if (e.target instanceof Element && e.target.closest(".header-lang-dropdown, .footer-lang-dropdown")) return;
+    closeLangDropdowns();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeLangDropdowns();
+  });
 }
 
-init();
+// Apply theme immediately to avoid flash
+(function () {
+  const PREFS = ["auto", "dark", "light"];
+  let pref = "auto";
+  try {
+    const stored = localStorage.getItem("debuginn_tools_theme");
+    if (PREFS.includes(stored)) pref = stored;
+  } catch (_) {}
+  const resolved = pref === "auto"
+    ? (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")
+    : pref;
+  document.documentElement.setAttribute("data-theme", resolved);
+})();
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", init);
+} else {
+  init();
+}

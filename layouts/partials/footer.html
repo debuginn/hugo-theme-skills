@@ -4,6 +4,9 @@
 {{- $lang := .Site.Language.Lang -}}
 {{- $isZh := eq $lang "zh" -}}
 {{- $homeURL := cond $isZh "/zh/" "/" -}}
+{{- $otherLangHref := cond $isZh "/" "/zh/" -}}
+{{- $otherLangLabel := cond $isZh "EN" "中文" -}}
+{{- $currentLangLabel := cond $isZh "中文" "EN" -}}
 {{- $copyright := .Site.Params.copyright | default "© 2026 Debuginn. All rights reserved." -}}
 {{- $themeName := .Site.Params.themeName | default "hugo-theme-skills" -}}
 {{- $themeURL := .Site.Params.themeURL | default "https://github.com/debuginn/hugo-theme-skills" -}}
@@ -12,7 +15,7 @@
     <div class="footer-main">
       <div class="footer-brand-col">
         <a class="logo footer-brand-wrap" href="{{ $homeURL }}">
-          <img class="logo-mark" src="{{ $logoImage }}" alt="{{ .Site.Title }} logo" style="width:48px;height:48px;border-radius:12px;object-fit:cover;" />
+          <img class="logo-mark" src="{{ $logoImage }}" alt="{{ .Site.Title }} logo" width="48" height="48" style="border-radius:12px;object-fit:cover;" />
           <span class="footer-brand-text">
             <span>{{ .Site.Title }}</span>
             <span class="footer-tag">{{ i18n "tools_tag" }}</span>
@@ -26,8 +29,29 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <span>{{ $copyright }}</span>
+      <div class="footer-lang-dropdown">
+        <button class="footer-lang-trigger" type="button" aria-label="{{ i18n "switch_lang" }}" aria-haspopup="listbox" aria-expanded="false">
+          <span class="footer-lang-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="9"></circle>
+              <path d="M3 12h18"></path>
+              <path d="M12 3c2.6 2.4 4 5.6 4 9s-1.4 6.6-4 9c-2.6-2.4-4-5.6-4-9s1.4-6.6 4-9z"></path>
+            </svg>
+          </span>
+          <span class="footer-lang-current">{{ $currentLangLabel }}</span>
+        </button>
+        <div class="footer-lang-menu" role="listbox" aria-label="{{ i18n "lang_options" }}">
+          {{- if $isZh }}
+          <button type="button" data-footer-lang-href="./" class="active">中文</button>
+          <button type="button" data-footer-lang-href="{{ $otherLangHref }}">EN</button>
+          {{- else }}
+          <button type="button" data-footer-lang-href="{{ $otherLangHref }}">中文</button>
+          <button type="button" data-footer-lang-href="./" class="active">EN</button>
+          {{- end }}
+        </div>
+      </div>
       <div class="footer-meta">
+        <p>{{ $copyright }}</p>
         <p class="footer-credit">{{ i18n "built_with" }} <a href="{{ $blogURL }}" target="_blank" rel="noopener">Debuginn</a>. {{ i18n "theme_label" }} <a href="{{ $themeURL }}" target="_blank" rel="noopener">{{ $themeName }}</a>.</p>
       </div>
     </div>

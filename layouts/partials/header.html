@@ -12,7 +12,7 @@
     <nav class="top-pill">
       <div class="pill-left">
         <a class="logo" href="{{ $homeURL }}" aria-label="{{ .Site.Title }}">
-          <img class="logo-mark" src="{{ $logoImage }}" alt="{{ .Site.Title }} logo" />
+          <img class="logo-mark" src="{{ $logoImage }}" alt="{{ .Site.Title }} logo" width="40" height="40" />
           <span>{{ .Site.Title }}</span>
         </a>
         <div class="desktop-nav">
@@ -22,9 +22,10 @@
         </div>
       </div>
       <div class="pill-right">
-        <button id="themeToggleBtn" class="mode-btn" type="button" aria-label="{{ i18n "switch_theme" }}">◐</button>
+        <button class="mode-btn" type="button" aria-label="{{ i18n "switch_theme" }}">◐</button>
+        <button class="menu-btn" type="button" aria-label="{{ i18n "open_menu" | default "Open menu" }}" aria-controls="mobile-menu" aria-expanded="false">☰</button>
         <div class="header-lang-dropdown">
-          <button id="langToggleBtn" class="header-lang-trigger" type="button" aria-label="{{ i18n "switch_lang" }}" aria-haspopup="listbox" aria-expanded="false">
+          <button class="header-lang-trigger" type="button" aria-label="{{ i18n "switch_lang" }}" aria-haspopup="listbox" aria-expanded="false">
             <span class="header-lang-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="12" cy="12" r="9"></circle>
@@ -45,6 +46,11 @@
           </div>
         </div>
       </div>
+    </nav>
+    <nav id="mobile-menu" class="mobile-menu" aria-hidden="true">
+      <a href="{{ $homeURL }}">{{ i18n "nav_tools" }}</a>
+      <a href="{{ $blogURL }}" target="_blank" rel="noopener">{{ i18n "nav_blog" }}</a>
+      <a href="{{ $githubURL }}" target="_blank" rel="noopener">{{ i18n "nav_github" }}</a>
     </nav>
   </div>
 </header>
