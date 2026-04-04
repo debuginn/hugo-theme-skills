@@ -1,0 +1,80 @@
+{{- /* Controls for the WeChat/XHS poster tool */ -}}
+<div class="field">
+  <label for="sizeSelect">{{ i18n "size_ratio" }}</label>
+  <select id="sizeSelect" class="visually-hidden-select" aria-hidden="true" tabindex="-1">
+    <option value="square" selected>{{ i18n "wechat_size" }}</option>
+    <option value="xhs">{{ i18n "xhs_size" }}</option>
+  </select>
+  <div class="scheme-grid" aria-label="{{ i18n "size_ratio" }}">
+    <button class="scheme-btn size-btn is-active" type="button" data-size="square">{{ i18n "wechat_size" }}</button>
+    <button class="scheme-btn size-btn" type="button" data-size="xhs">{{ i18n "xhs_size" }}</button>
+  </div>
+</div>
+
+<div class="field">
+  <label>{{ i18n "bg_color" }}</label>
+  <div class="visually-hidden-color-inputs" aria-hidden="true">
+    <input id="bgInput" type="color" value="#ffffff" tabindex="-1" />
+    <input id="bgHexInput" type="text" value="#ffffff" tabindex="-1" />
+  </div>
+  <div class="scheme-grid" aria-label="{{ i18n "bg_color" }}">
+    <button class="scheme-btn bg-btn is-active" type="button" data-bg="#ffffff" aria-label="{{ i18n "white_bg" }}">
+      <span class="scheme-swatch scheme-swatch-bg-white"></span>
+    </button>
+    <button class="scheme-btn bg-btn" type="button" data-bg="#eef2f7" aria-label="{{ i18n "gray_bg" }}">
+      <span class="scheme-swatch scheme-swatch-bg-gray"></span>
+    </button>
+    <button class="scheme-btn bg-btn" type="button" data-bg="#f7f0e8" aria-label="{{ i18n "cream_bg" }}">
+      <span class="scheme-swatch scheme-swatch-bg-cream"></span>
+    </button>
+    <button class="scheme-btn bg-btn" type="button" data-bg="#111827" aria-label="{{ i18n "dark_bg" }}">
+      <span class="scheme-swatch scheme-swatch-bg-dark"></span>
+    </button>
+    <button id="pickColorBtn" class="scheme-btn bg-btn bg-picker-btn" type="button" aria-label="{{ i18n "custom_color" }}">
+      <span id="customBgSwatch" class="scheme-swatch scheme-swatch-custom"></span>
+    </button>
+  </div>
+</div>
+
+<div class="field">
+  <label for="imageInput">{{ i18n "screenshot_image" }}</label>
+  <div class="upload-control">
+    <input id="imageInput" class="sr-only-input" type="file" accept="image/*" />
+    <label for="imageInput" class="upload-trigger">{{ i18n "choose_screenshot" }}</label>
+    <span id="imageFileName" class="upload-file-name">{{ i18n "no_file" }}</span>
+  </div>
+</div>
+
+<div class="field">
+  <label for="titleInput">{{ i18n "title_label" }}</label>
+  <input id="titleInput" type="text" value="{{ i18n "hero_title_prefix" }}" />
+</div>
+
+<div class="field">
+  <label for="gradientSelect">{{ i18n "gradient_scheme" }}</label>
+  <select id="gradientSelect" class="visually-hidden-select" aria-hidden="true" tabindex="-1">
+    <option value="cool" selected>{{ i18n "cool_scheme" }}</option>
+    <option value="warm">{{ i18n "warm_scheme" }}</option>
+    <option value="ocean">{{ i18n "ocean_scheme" }}</option>
+    <option value="mono">{{ i18n "mono_scheme" }}</option>
+  </select>
+  <div class="scheme-grid" aria-label="{{ i18n "gradient_scheme" }}">
+    <button class="scheme-btn is-active" type="button" data-scheme="cool" aria-label="{{ i18n "cool_scheme" }}">
+      <span class="scheme-swatch scheme-swatch-cool"></span>
+    </button>
+    <button class="scheme-btn" type="button" data-scheme="warm" aria-label="{{ i18n "warm_scheme" }}">
+      <span class="scheme-swatch scheme-swatch-warm"></span>
+    </button>
+    <button class="scheme-btn" type="button" data-scheme="ocean" aria-label="{{ i18n "ocean_scheme" }}">
+      <span class="scheme-swatch scheme-swatch-ocean"></span>
+    </button>
+    <button class="scheme-btn" type="button" data-scheme="mono" aria-label="{{ i18n "mono_scheme" }}">
+      <span class="scheme-swatch scheme-swatch-mono"></span>
+    </button>
+  </div>
+</div>
+
+<div class="field">
+  <label for="subtitleInput">{{ i18n "subtitle_label" }}</label>
+  <input id="subtitleInput" type="text" value="" />
+</div>

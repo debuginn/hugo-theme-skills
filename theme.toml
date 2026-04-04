@@ -1,0 +1,13 @@
+name = "Skills"
+license = "MIT"
+licenselink = "https://github.com/debuginn/hugo-theme-skills/blob/main/LICENSE"
+description = "A minimal, terminal-inspired Hugo theme for tools & skills portals with multilingual support."
+homepage = "https://github.com/debuginn/hugo-theme-skills"
+demosite = ""
+tags = ["tools", "portal", "canvas", "multilingual", "dark-mode"]
+features = ["multilingual", "dark-mode", "canvas-tools", "responsive"]
+min_version = "0.115.0"
+
+[author]
+  name = "debuginn"
+  homepage = "https://blog.debuginn.com/"

@@ -1,0 +1,32 @@
+baseURL = "https://example.com/"
+title = "Debuginn"
+theme = "hugo-theme-skills"
+defaultContentLanguage = "en"
+defaultContentLanguageInSubdir = false
+
+[languages]
+  [languages.en]
+    languageName = "English"
+    languageCode = "en"
+    weight = 1
+    contentDir = "content"
+    [languages.en.params]
+      langHref = "/"
+      langLabel = "EN"
+  [languages.zh]
+    languageName = "中文"
+    languageCode = "zh-CN"
+    weight = 2
+    contentDir = "content/zh"
+    [languages.zh.params]
+      langHref = "/zh/"
+      langLabel = "中文"
+
+[params]
+  author = "debuginn"
+  logoImage = "/img/logo.jpg"
+  blogURL = "https://blog.debuginn.com/"
+  githubURL = "https://github.com/debuginn"
+  copyright = "© 2026 Debuginn. All rights reserved."
+  themeName = "hugo-theme-skills"
+  themeURL = "https://github.com/debuginn/hugo-theme-skills"

@@ -1,0 +1,46 @@
+{{- /* Controls for the Blog Cover Generator tool */ -}}
+<div class="field">
+  <label for="imageInput">{{ i18n "center_logo" }}</label>
+  <div class="upload-control">
+    <input id="imageInput" class="sr-only-input" type="file" accept="image/*" />
+    <label for="imageInput" class="upload-trigger">{{ i18n "choose_logo_file" }}</label>
+    <span id="imageFileName" class="upload-file-name">{{ i18n "no_file" }}</span>
+  </div>
+</div>
+
+<div class="field">
+  <label for="titleInput">{{ i18n "title_label" }}</label>
+  <input id="titleInput" type="text" value="{{ i18n "hero_title_prefix" }}" />
+</div>
+
+<div class="field">
+  <label>{{ i18n "accent_color" }}</label>
+  <input id="accentInput" class="sr-only-input" type="color" value="#3a66ff" />
+  <div class="scheme-grid" aria-label="{{ i18n "accent_color" }}">
+    <button class="scheme-btn accent-btn is-active" type="button" data-accent="#3a66ff" aria-label="{{ i18n "blue_theme" }}">
+      <span class="scheme-swatch scheme-swatch-accent-blue"></span>
+    </button>
+    <button class="scheme-btn accent-btn" type="button" data-accent="#6d4aff" aria-label="{{ i18n "violet_theme" }}">
+      <span class="scheme-swatch scheme-swatch-accent-violet"></span>
+    </button>
+    <button class="scheme-btn accent-btn" type="button" data-accent="#12b3a8" aria-label="{{ i18n "teal_theme" }}">
+      <span class="scheme-swatch scheme-swatch-accent-teal"></span>
+    </button>
+    <button class="scheme-btn accent-btn" type="button" data-accent="#ff7a45" aria-label="{{ i18n "orange_theme" }}">
+      <span class="scheme-swatch scheme-swatch-accent-orange"></span>
+    </button>
+    <button id="pickAccentBtn" class="scheme-btn accent-btn accent-picker-btn" type="button" aria-label="{{ i18n "custom_color" }}">
+      <span id="customAccentSwatch" class="scheme-swatch scheme-swatch-custom"></span>
+    </button>
+  </div>
+</div>
+
+<div class="field">
+  <label for="glowInput">{{ i18n "glow_intensity" }}</label>
+  <input id="glowInput" type="range" min="20" max="100" value="68" />
+</div>
+
+<div class="field">
+  <label for="trackingInput">{{ i18n "title_tracking" }}</label>
+  <input id="trackingInput" type="range" min="0" max="72" value="18" />
+</div>

@@ -1,0 +1,35 @@
+{{- $logoImage := .Site.Params.logoImage | default "/img/logo.jpg" -}}
+{{- $blogURL := .Site.Params.blogURL | default "https://blog.debuginn.com/" -}}
+{{- $githubURL := .Site.Params.githubURL | default "https://github.com/debuginn" -}}
+{{- $lang := .Site.Language.Lang -}}
+{{- $isZh := eq $lang "zh" -}}
+{{- $homeURL := cond $isZh "/zh/" "/" -}}
+{{- $copyright := .Site.Params.copyright | default "© 2026 Debuginn. All rights reserved." -}}
+{{- $themeName := .Site.Params.themeName | default "hugo-theme-skills" -}}
+{{- $themeURL := .Site.Params.themeURL | default "https://github.com/debuginn/hugo-theme-skills" -}}
+<footer class="footer">
+  <div class="footer-card">
+    <div class="footer-main">
+      <div class="footer-brand-col">
+        <a class="logo footer-brand-wrap" href="{{ $homeURL }}">
+          <img class="logo-mark" src="{{ $logoImage }}" alt="{{ .Site.Title }} logo" style="width:48px;height:48px;border-radius:12px;object-fit:cover;" />
+          <span class="footer-brand-text">
+            <span>{{ .Site.Title }}</span>
+            <span class="footer-tag">{{ i18n "tools_tag" }}</span>
+          </span>
+        </a>
+        <nav class="footer-inline-links" aria-label="Footer links">
+          <a href="{{ $homeURL }}">{{ i18n "footer_tools" }}</a>
+          <a href="{{ $blogURL }}" target="_blank" rel="noopener">{{ i18n "footer_blog" }}</a>
+          <a href="{{ $githubURL }}" target="_blank" rel="noopener">{{ i18n "footer_github" }}</a>
+        </nav>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>{{ $copyright }}</span>
+      <div class="footer-meta">
+        <p class="footer-credit">{{ i18n "built_with" }} <a href="{{ $blogURL }}" target="_blank" rel="noopener">Debuginn</a>. {{ i18n "theme_label" }} <a href="{{ $themeURL }}" target="_blank" rel="noopener">{{ $themeName }}</a>.</p>
+      </div>
+    </div>
+  </div>
+</footer>

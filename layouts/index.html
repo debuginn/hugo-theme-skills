@@ -1,0 +1,92 @@
+{{ define "title" }}{{ .Site.Title }}{{ end }}
+
+{{ define "main" }}
+{{- $logoImage := .Site.Params.logoImage | default "/img/logo.jpg" -}}
+{{- $lang := .Site.Language.Lang -}}
+{{- $isZh := eq $lang "zh" -}}
+{{- $tools := where .Site.Pages "Section" "tools" -}}
+{{- $toolCount := len $tools -}}
+
+<svg class="logo-defs" aria-hidden="true" focusable="false" width="0" height="0">
+  <defs>
+    <linearGradient id="logoBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38d7ff" />
+      <stop offset="100%" stop-color="#1166ff" />
+    </linearGradient>
+    <linearGradient id="logoBlueSoft" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2fe0ff" />
+      <stop offset="100%" stop-color="#1a7fff" />
+    </linearGradient>
+  </defs>
+</svg>
+
+<main class="site">
+  <section class="hero" id="top">
+    <div class="site-hero">
+      <div class="site-hero-left">
+        <div class="site-hero-eyebrow">
+          <span class="hero-badge hero-badge-green">
+            <span class="hero-badge-dot"></span>
+            <span>{{ i18n "system_online" }}</span>
+          </span>
+          <span class="hero-badge hero-badge-blue">{{ $toolCount }} {{ i18n "nav_tools" | upper }}</span>
+        </div>
+        <div class="site-hero-main">
+          <h1 class="site-hero-title"><span>{{ i18n "hero_title_prefix" }}</span> <span class="hero-title-accent">{{ i18n "hero_title_accent" }}</span></h1>
+          <p class="site-hero-desc">{{ i18n "hero_desc" }}</p>
+        </div>
+      </div>
+      <div class="site-hero-visual" aria-hidden="true">
+        <div class="visual-orbit-wrap">
+          <div class="orbit orbit-1">
+            <div class="orbit-node node-blue"></div>
+          </div>
+          <div class="orbit orbit-2">
+            <div class="orbit-node node-green"></div>
+          </div>
+          <div class="orbit orbit-3">
+            <div class="orbit-node node-purple"></div>
+          </div>
+          <div class="visual-center">
+            <img class="visual-center-logo" src="{{ $logoImage }}" alt="logo" />
+          </div>
+          <div class="visual-scan"></div>
+          <svg class="visual-bracket tl" viewBox="0 0 32 32"><path d="M2 18V2h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <svg class="visual-bracket tr" viewBox="0 0 32 32"><path d="M30 18V2H14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <svg class="visual-bracket bl" viewBox="0 0 32 32"><path d="M2 14v16h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <svg class="visual-bracket br" viewBox="0 0 32 32"><path d="M30 14v16H14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="portal-grid">
+      {{ range $tools }}
+      <article class="portal-card">
+        <div class="card-bar" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <p class="card-path">$ pwd: ~/tools/{{ .Params.slug | default .Slug }}</p>
+        {{ with .Params.icon }}
+        <div class="tool-mark" aria-hidden="true">
+          <span class="tool-mark-badge">{{ . | safeHTML }}</span>
+          <span class="tool-mark-label">{{ .Title }}</span>
+        </div>
+        {{ end }}
+        <p class="eyebrow">{{ with .Params.eyebrow }}{{ . }}{{ else }}{{ i18n "tool_overview" }}{{ end }}</p>
+        <p class="lead"><span>{{ .Summary }}</span></p>
+        <div class="hero-actions">
+          <a class="btn btn-solid" href="{{ .RelPermalink }}">{{ i18n "open_tool" }}</a>
+        </div>
+        {{ with .Params.tags }}
+        <div class="card-tags">
+          {{ range . }}<span class="card-tag">{{ . }}</span>{{ end }}
+        </div>
+        {{ end }}
+      </article>
+      {{ end }}
+    </div>
+  </section>
+</main>
+{{ end }}

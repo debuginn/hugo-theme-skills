@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="{{ .Site.Language.Lang }}" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{ block "title" . }}{{ .Site.Title }}{{ end }}</title>
+  <link rel="icon" type="image/jpeg" href="{{ .Site.Params.logoImage | default "/img/logo.jpg" }}" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700;800&display=swap" rel="stylesheet" />
+  {{ block "styles" . }}<link rel="stylesheet" href="{{ "css/portal.css" | relURL }}" />{{ end }}
+</head>
+<body>
+  {{ partial "header.html" . }}
+  {{ block "main" . }}{{ end }}
+  {{ partial "footer.html" . }}
+  {{ block "scripts" . }}<script src="{{ "js/portal.js" | relURL }}"></script>{{ end }}
+</body>
+</html>

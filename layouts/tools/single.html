@@ -1,0 +1,109 @@
+{{ define "title" }}{{ .Title }} — {{ .Site.Title }}{{ end }}
+
+{{ define "styles" }}
+<link rel="stylesheet" href="{{ "css/portal.css" | relURL }}" />
+{{ with .Params.toolCSS }}<link rel="stylesheet" href="{{ . | relURL }}" />{{ end }}
+{{ end }}
+
+{{ define "main" }}
+{{- $toolType := .Params.toolType | default "" -}}
+
+<main class="shell">
+  <div class="app">
+    <aside class="panel">
+      <div class="panel-bar" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <p class="panel-path">{{ i18n "panel_config" }}{{ .Params.slug | default .Slug }}</p>
+      <h1>{{ .Title }}</h1>
+      <p class="panel-desc">{{ .Params.desc | default .Summary }}</p>
+
+      {{ if eq $toolType "wx-xhs-poster" }}
+        {{ partial "tool-controls-wx-xhs-poster.html" . }}
+      {{ else if eq $toolType "blog-cover" }}
+        {{ partial "tool-controls-blog-cover.html" . }}
+      {{ end }}
+
+      <div class="btns">
+        <button id="downloadBtn" class="btn btn-primary" type="button">{{ i18n "export_png" }}</button>
+      </div>
+    </aside>
+
+    <section class="preview-wrap">
+      <div class="preview-bar" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <p class="preview-path">{{ i18n "preview_label" }}</p>
+      <div class="canvas-shell">
+        {{ if eq $toolType "blog-cover" }}
+        <canvas id="preview" width="1600" height="900"></canvas>
+        {{ else }}
+        <canvas id="preview" width="1080" height="1080"></canvas>
+        {{ end }}
+      </div>
+    </section>
+  </div>
+
+  {{ if eq $toolType "wx-xhs-poster" }}
+  <div id="colorModal" class="modal" hidden>
+    <div class="modal-backdrop" data-close-modal="true"></div>
+    <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="colorModalTitle">
+      <div class="modal-bar" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <p class="modal-path">$ background: {{ .Params.slug | default .Slug }}</p>
+      <div class="modal-head">
+        <h2 id="colorModalTitle">{{ i18n "choose_bg_color" }}</h2>
+        <button id="closeColorModalBtn" class="modal-close" type="button" aria-label="{{ i18n "close_label" }}">{{ i18n "close_label" }}</button>
+      </div>
+      <div class="modal-preview">
+        <span id="modalColorPreview" class="modal-preview-swatch"></span>
+        <span id="modalColorValue" class="modal-preview-value">#ffffff</span>
+      </div>
+      <div class="modal-section">
+        <span class="modal-label">{{ i18n "preset_colors" }}</span>
+        <div class="scheme-grid modal-scheme-grid" aria-label="{{ i18n "preset_colors" }}">
+          <button class="scheme-btn modal-bg-btn" type="button" data-modal-bg="#ffffff" aria-label="{{ i18n "white_bg" }}">
+            <span class="scheme-swatch scheme-swatch-bg-white"></span>
+          </button>
+          <button class="scheme-btn modal-bg-btn" type="button" data-modal-bg="#eef2f7" aria-label="{{ i18n "gray_bg" }}">
+            <span class="scheme-swatch scheme-swatch-bg-gray"></span>
+          </button>
+          <button class="scheme-btn modal-bg-btn" type="button" data-modal-bg="#f7f0e8" aria-label="{{ i18n "cream_bg" }}">
+            <span class="scheme-swatch scheme-swatch-bg-cream"></span>
+          </button>
+          <button class="scheme-btn modal-bg-btn" type="button" data-modal-bg="#111827" aria-label="{{ i18n "dark_bg" }}">
+            <span class="scheme-swatch scheme-swatch-bg-dark"></span>
+          </button>
+          <button class="scheme-btn modal-bg-btn" type="button" data-modal-bg="#dbeafe" aria-label="{{ i18n "white_bg" }}">
+            <span class="scheme-swatch scheme-swatch-bg-sky"></span>
+          </button>
+          <button class="scheme-btn modal-bg-btn" type="button" data-modal-bg="#fde68a" aria-label="{{ i18n "white_bg" }}">
+            <span class="scheme-swatch scheme-swatch-bg-gold"></span>
+          </button>
+        </div>
+      </div>
+      <div class="modal-section">
+        <label class="modal-label" for="modalHexInput">{{ i18n "hex_label" }}</label>
+        <input id="modalHexInput" class="modal-input" type="text" value="#ffffff" />
+      </div>
+      <div class="modal-actions">
+        <button id="modalEyedropperBtn" class="modal-btn modal-btn-secondary" type="button">{{ i18n "eyedropper" }}</button>
+        <button id="applyColorBtn" class="modal-btn modal-btn-primary" type="button">{{ i18n "apply_color" }}</button>
+      </div>
+    </div>
+  </div>
+  {{ end }}
+</main>
+{{ end }}
+
+{{ define "scripts" }}
+<script src="{{ "js/portal.js" | relURL }}"></script>
+{{ with .Params.toolJS }}<script src="{{ . | relURL }}"></script>{{ end }}
+{{ end }}
