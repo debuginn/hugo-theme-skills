@@ -27,6 +27,6 @@ defaultContentLanguageInSubdir = false
   logoImage = "/img/logo.jpg"
   blogURL = "https://blog.debuginn.com/"
   githubURL = "https://github.com/debuginn"
-  copyright = "© 2026 Debuginn. All rights reserved."
+  copyright = "Open source, freely shared."
   themeName = "hugo-theme-skills"
   themeURL = "https://github.com/debuginn/hugo-theme-skills"
