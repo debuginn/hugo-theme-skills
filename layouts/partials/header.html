@@ -1,6 +1,7 @@
 {{- $logoImage := .Site.Params.logoImage | default "/img/logo.jpg" -}}
 {{- $blogURL := .Site.Params.blogURL | default "https://blog.debuginn.com/" -}}
 {{- $githubURL := .Site.Params.githubURL | default "https://github.com/debuginn" -}}
+{{- $brandName := .Site.Params.brandName | default .Site.Title -}}
 {{- $lang := .Site.Language.Lang -}}
 {{- $isZh := eq $lang "zh" -}}
 {{- $homeURL := cond $isZh "/zh/" "/" -}}
@@ -11,9 +12,9 @@
   <div class="container nav-shell">
     <nav class="top-pill">
       <div class="pill-left">
-        <a class="logo" href="{{ $homeURL }}" aria-label="{{ .Site.Title }}">
-          <img class="logo-mark" src="{{ $logoImage }}" alt="{{ .Site.Title }} logo" width="40" height="40" />
-          <span>{{ .Site.Title }}</span>
+        <a class="logo" href="{{ $homeURL }}" aria-label="{{ $brandName }}">
+          <img class="logo-mark" src="{{ $logoImage }}" alt="{{ $brandName }} logo" width="40" height="40" />
+          <span>{{ $brandName }}</span>
         </a>
         <div class="desktop-nav">
           <a href="{{ $homeURL }}">{{ i18n "nav_tools" }}</a>
