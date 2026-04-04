@@ -24,7 +24,7 @@ defaultContentLanguageInSubdir = false
 
 [params]
   author = "debuginn"
-  logoImage = "/img/logo.jpg"
+  logoImage = "/img/logo.png"
   blogURL = "https://blog.debuginn.com/"
   githubURL = "https://github.com/debuginn"
   copyright = "Open source, freely shared."
