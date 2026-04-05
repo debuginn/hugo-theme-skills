@@ -5,6 +5,7 @@
 {{- $isZh := eq $lang "zh" -}}
 {{- $homeURL := cond $isZh "/zh/" "/" -}}
 {{- $otherLangHref := cond $isZh "/" "/zh/" -}}
+{{- range .Translations }}{{- $otherLangHref = .RelPermalink -}}{{- end -}}
 {{- $otherLangLabel := cond $isZh "EN" "中文" -}}
 {{- $currentLangLabel := cond $isZh "中文" "EN" -}}
 {{- $copyright := .Site.Params.copyright | default "Open source, freely shared." -}}

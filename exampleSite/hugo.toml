@@ -1,5 +1,5 @@
 baseURL = "https://example.com/"
-title = "Debug客栈 AI 工具站"
+title = "DebugInn AI 工具站"
 theme = "hugo-theme-skills"
 defaultContentLanguage = "en"
 defaultContentLanguageInSubdir = false
@@ -10,6 +10,7 @@ defaultContentLanguageInSubdir = false
     languageCode = "en"
     weight = 1
     contentDir = "content"
+    title = "DebugInn AI Tools"
     [languages.en.params]
       langHref = "/"
       langLabel = "EN"
@@ -23,7 +24,7 @@ defaultContentLanguageInSubdir = false
       langLabel = "中文"
 
 [params]
-  brandName = "Debug客栈"
+  brandName = "DebugInn"
   logoImage = "/img/logo.png"
   blogURL = "https://blog.debuginn.com/"
   githubURL = "https://github.com/debuginn"
