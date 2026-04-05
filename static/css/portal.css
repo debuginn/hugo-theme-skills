@@ -75,7 +75,7 @@ html, body {
 
 body {
   min-height: 100vh;
-  font-family: "Plus Jakarta Sans", "Noto Sans SC", "PingFang SC", sans-serif;
+  font-family: "IBM Plex Mono", "Noto Sans SC", monospace;
   color: var(--text);
   background:
     radial-gradient(1200px 600px at 90% -10%, #dcecff 10%, transparent 60%),
@@ -113,8 +113,7 @@ button {
 }
 
 .site {
-  width: min(var(--content-w), calc(100% - 32px));
-  min-height: 100vh;
+  width: min(1120px, calc(100% - 32px));
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -492,7 +491,7 @@ button {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 48px 0 28px;
+  padding: 28px 0 28px;
   gap: 40px;
 }
 
@@ -974,8 +973,8 @@ html[data-theme="light"] .tool-mark-badge {
 /* ── Footer ── */
 
 .footer {
-  margin-top: 80px;
-  padding-bottom: 56px;
+  margin-top: 32px;
+  padding-bottom: 40px;
 }
 
 .footer-card {

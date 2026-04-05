@@ -1,8 +1,8 @@
+(function () {
 const previewCanvas = document.getElementById("preview");
 const ctx = previewCanvas.getContext("2d");
 const EXPORT_SCALE = 2;
 const PREVIEW_MAX_SIDE = 720;
-const THEME_KEY = "debuginn_tools_theme";
 const STATE_KEY = "debuginn_wx_xhs_poster_state";
 
 const imageInput = document.getElementById("imageInput");
@@ -27,9 +27,6 @@ const gradientSelect = document.getElementById("gradientSelect");
 const schemeButtons = document.querySelectorAll(".scheme-btn[data-scheme]");
 const pickColorBtn = document.getElementById("pickColorBtn");
 const downloadBtn = document.getElementById("downloadBtn");
-const themeToggleBtn = document.getElementById("themeToggleBtn");
-const langToggleBtn = document.getElementById("langToggleBtn");
-const langDropdown = document.querySelector(".header-lang-dropdown");
 
 let screenshotImage = null;
 let modalBackgroundColor = "#ffffff";
@@ -82,21 +79,6 @@ function fitRect(srcW, srcH, dstX, dstY, dstW, dstH) {
   const x = dstX + (dstW - drawW) / 2;
   const y = dstY + (dstH - drawH) / 2;
   return { x, y, w: drawW, h: drawH };
-}
-
-function applyTheme(theme) {
-  document.documentElement.setAttribute("data-theme", theme);
-}
-
-function updateThemeButton(theme) {
-  if (!themeToggleBtn) return;
-  themeToggleBtn.setAttribute("aria-label", theme === "dark" ? "Switch to light theme" : "Switch to dark theme");
-}
-
-function closeLangMenu() {
-  if (!langDropdown || !langToggleBtn) return;
-  langDropdown.classList.remove("open");
-  langToggleBtn.setAttribute("aria-expanded", "false");
 }
 
 function loadPersistedState() {
@@ -183,9 +165,7 @@ function syncBackgroundButtons() {
   });
 
   if (customBgSwatch) {
-    customBgSwatch.style.background = matchedPreset
-      ? ""
-      : currentColor;
+    customBgSwatch.style.background = matchedPreset ? "" : currentColor;
     customBgSwatch.classList.toggle("is-custom-color", !matchedPreset);
   }
 }
@@ -211,12 +191,6 @@ function openColorModal() {
 
 function closeColorModal() {
   colorModal.hidden = true;
-}
-
-function closeLangMenu() {
-  if (!langDropdown || !langToggleBtn) return;
-  langDropdown.classList.remove("open");
-  langToggleBtn.setAttribute("aria-expanded", "false");
 }
 
 function getCurrentPreset() {
@@ -474,7 +448,6 @@ downloadBtn.addEventListener("click", () => {
   link.click();
 });
 
-const savedTheme = localStorage.getItem(THEME_KEY) || "dark";
 const savedState = loadPersistedState();
 
 if (savedState) {
@@ -487,43 +460,6 @@ if (savedState) {
   persistedImageName = savedState.imageName || "";
 }
 
-applyTheme(savedTheme);
-updateThemeButton(savedTheme);
-
-if (themeToggleBtn) {
-  themeToggleBtn.addEventListener("click", () => {
-    const nextTheme = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
-    localStorage.setItem(THEME_KEY, nextTheme);
-    applyTheme(nextTheme);
-    updateThemeButton(nextTheme);
-  });
-}
-
-if (langToggleBtn && langDropdown) {
-  langToggleBtn.addEventListener("click", (event) => {
-    event.stopPropagation();
-    const nextOpen = !langDropdown.classList.contains("open");
-    langDropdown.classList.toggle("open", nextOpen);
-    langToggleBtn.setAttribute("aria-expanded", nextOpen ? "true" : "false");
-  });
-
-  document.querySelectorAll("[data-lang-href]").forEach((option) => {
-    option.addEventListener("click", () => {
-      const href = option.getAttribute("data-lang-href");
-      if (href) window.location.href = href;
-    });
-  });
-
-  document.addEventListener("click", (event) => {
-    if (event.target instanceof Element && event.target.closest(".header-lang-dropdown")) return;
-    closeLangMenu();
-  });
-
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") closeLangMenu();
-  });
-}
-
 syncSizeButtons();
 syncSchemeButtons();
 render();
@@ -531,3 +467,4 @@ render();
 if (savedState?.imageData) {
   setScreenshotImage(savedState.imageData, savedState.imageName || "");
 }
+})();

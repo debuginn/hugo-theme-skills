@@ -1,6 +1,6 @@
+(function () {
 const previewCanvas = document.getElementById("preview");
 const ctx = previewCanvas.getContext("2d");
-const THEME_KEY = "debuginn_tools_theme";
 const STATE_KEY = "debuginn_blog_cover_state";
 
 const imageInput = document.getElementById("imageInput");
@@ -13,9 +13,6 @@ const customAccentSwatch = document.getElementById("customAccentSwatch");
 const glowInput = document.getElementById("glowInput");
 const trackingInput = document.getElementById("trackingInput");
 const downloadBtn = document.getElementById("downloadBtn");
-const themeToggleBtn = document.getElementById("themeToggleBtn");
-const langToggleBtn = document.getElementById("langToggleBtn");
-const langDropdown = document.querySelector(".header-lang-dropdown");
 
 const COVER_SIZE = { width: 1600, height: 900 };
 
@@ -37,15 +34,6 @@ function syncAccentButtons() {
   pickAccentBtn.classList.toggle("is-active", !matchedPreset);
   customAccentSwatch.style.background = matchedPreset ? "" : currentAccent;
   customAccentSwatch.classList.toggle("is-custom-color", !matchedPreset);
-}
-
-function applyTheme(theme) {
-  document.documentElement.setAttribute("data-theme", theme);
-}
-
-function updateThemeButton(theme) {
-  if (!themeToggleBtn) return;
-  themeToggleBtn.setAttribute("aria-label", theme === "dark" ? "Switch to light theme" : "Switch to dark theme");
 }
 
 function normalizeHex(value) {
@@ -220,38 +208,6 @@ function setCenterImage(dataUrl, fileName = "") {
   img.src = dataUrl;
 }
 
-function bindLangDropdown() {
-  if (!langDropdown || !langToggleBtn) return;
-
-  const close = () => {
-    langDropdown.classList.remove("open");
-    langToggleBtn.setAttribute("aria-expanded", "false");
-  };
-
-  langToggleBtn.addEventListener("click", (event) => {
-    event.stopPropagation();
-    const nextOpen = !langDropdown.classList.contains("open");
-    langDropdown.classList.toggle("open", nextOpen);
-    langToggleBtn.setAttribute("aria-expanded", nextOpen ? "true" : "false");
-  });
-
-  document.querySelectorAll("[data-lang-href]").forEach((option) => {
-    option.addEventListener("click", () => {
-      const href = option.getAttribute("data-lang-href");
-      if (href) window.location.href = href;
-    });
-  });
-
-  document.addEventListener("click", (event) => {
-    if (event.target instanceof Element && event.target.closest(".header-lang-dropdown")) return;
-    close();
-  });
-
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") close();
-  });
-}
-
 imageInput.addEventListener("change", (event) => {
   const [file] = event.target.files || [];
   if (!file) {
@@ -293,7 +249,6 @@ downloadBtn.addEventListener("click", () => {
   link.click();
 });
 
-const savedTheme = localStorage.getItem(THEME_KEY) || "dark";
 const savedState = loadPersistedState();
 
 if (savedState) {
@@ -304,21 +259,9 @@ if (savedState) {
   persistedImageName = savedState.imageName || "";
 }
 
-applyTheme(savedTheme);
-updateThemeButton(savedTheme);
-bindLangDropdown();
-
-if (themeToggleBtn) {
-  themeToggleBtn.addEventListener("click", () => {
-    const nextTheme = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
-    localStorage.setItem(THEME_KEY, nextTheme);
-    applyTheme(nextTheme);
-    updateThemeButton(nextTheme);
-  });
-}
-
 render();
 
 if (savedState?.imageData) {
   setCenterImage(savedState.imageData, savedState.imageName || "");
 }
+})();

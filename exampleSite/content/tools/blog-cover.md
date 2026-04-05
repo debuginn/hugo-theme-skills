@@ -3,6 +3,7 @@ title: "Blog Cover Generator"
 slug: "debuginn-blog-cover"
 desc: "Upload a logo, edit the title, then generate a glowing blog hero cover in seconds."
 toolType: "blog-cover"
+eyebrow: "# > New Tool"
 toolCSS: "/css/blog-cover.css"
 toolJS: "/js/blog-cover.js"
 tags: ["Canvas API", "PNG Export", "Blog Cover"]
