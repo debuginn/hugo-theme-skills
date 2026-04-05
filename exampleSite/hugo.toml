@@ -40,5 +40,6 @@ defaultContentLanguageInSubdir = false
   githubURL = "https://github.com/debuginn"
   twitterURL = "https://x.com/idebuginn"
   telegramURL = "https://t.me/idebuginn"
+  wechatQR = "/img/wechat-qr.jpg"
   copyright = "Open source, freely shared."
   installCmd = "/plugin marketplace add debuginn/skills"

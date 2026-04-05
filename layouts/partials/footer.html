@@ -3,6 +3,7 @@
 {{- $githubURL := .Site.Params.githubURL | default "https://github.com/debuginn" -}}
 {{- $twitterURL := .Site.Params.twitterURL | default "" -}}
 {{- $telegramURL := .Site.Params.telegramURL | default "" -}}
+{{- $wechatQR := .Site.Params.wechatQR | default "" -}}
 {{- $lang := .Site.Language.Lang -}}
 {{- $isZh := eq $lang "zh" -}}
 {{- $homeURL := cond $isZh "/zh/" "/" -}}
@@ -48,6 +49,14 @@
           <a class="social-link" href="{{ . }}" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
           </a>
+          {{- end }}
+          {{- with $wechatQR }}
+          <div class="social-link wechat-link" role="button" aria-label="WeChat">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.5 4C5.358 4 2 6.91 2 10.5c0 1.99 1.007 3.77 2.604 5.01l-.39 2.09 2.21-1.13c.71.2 1.47.31 2.26.31.18 0 .36-.01.54-.02C9.074 16.276 9 15.9 9 15.5c0-3.59 3.358-6.5 7.5-6.5.35 0 .696.024 1.035.07C16.899 6.397 13.507 4 9.5 4zM7 8.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm5 0a1 1 0 1 1 0-2 1 1 0 0 1 0 2zM16.5 11C13.462 11 11 13.01 11 15.5s2.462 4.5 5.5 4.5c.69 0 1.35-.11 1.96-.31l1.84.94-.32-1.74C21.25 17.9 22 16.79 22 15.5 22 13.01 19.538 11 16.5 11zm-2 3a.75.75 0 1 1 0 1.5.75.75 0 0 1 0-1.5zm4 0a.75.75 0 1 1 0 1.5.75.75 0 0 1 0-1.5z"/></svg>
+            <div class="wechat-qr-pop">
+              <img src="{{ . }}" alt="WeChat QR Code" width="120" height="120" />
+            </div>
+          </div>
           {{- end }}
           {{- with $blogURL }}
           <a class="social-link" href="{{ . }}" target="_blank" rel="noopener noreferrer" aria-label="Blog">
