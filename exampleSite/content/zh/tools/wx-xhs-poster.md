@@ -1,7 +1,7 @@
 ---
 title: "小红书微信截图分享海报"
 slug: "debuginn-wx-xhs-poster"
-desc: "一个偏终端风格的轻量设计工具，用来把截图快速整理成更适合分享的方形宣传图。你可以上传截图、修改标题文案、调整背景颜色，然后直接导出 PNG。"
+desc: "把截图快速整理成更适合分享的方形宣传图。你可以上传截图、修改标题文案、调整背景颜色，然后直接导出 PNG。"
 toolType: "wx-xhs-poster"
 eyebrow: "# > Tool Overview"
 cardPath: "$ pwd: ~/tools/debuginn-wx-xhs-poster"
@@ -12,4 +12,4 @@ tags: ["Canvas API", "PNG Export", "XHS · WeChat"]
 weight: 1
 ---
 
-一个偏终端风格的轻量设计工具，用来把截图快速整理成更适合分享的方形宣传图。你可以上传截图、修改标题文案、调整背景颜色，然后直接导出 PNG。
+把截图快速整理成更适合分享的方形宣传图。你可以上传截图、修改标题文案、调整背景颜色，然后直接导出 PNG。

@@ -178,7 +178,7 @@ function syncModalButtons() {
 
 function updateModalPreview(color) {
   modalBackgroundColor = normalizeHex(color) || "#ffffff";
-  modalHexInput.value = modalBackgroundColor;
+  if (modalHexInput) modalHexInput.value = modalBackgroundColor;
   modalColorPreview.style.background = modalBackgroundColor;
   modalColorValue.textContent = modalBackgroundColor;
   syncModalButtons();
@@ -376,10 +376,12 @@ modalBgButtons.forEach((button) => {
   });
 });
 
-modalHexInput.addEventListener("input", () => {
-  const color = normalizeHex(modalHexInput.value);
-  if (color) updateModalPreview(color);
-});
+if (modalHexInput) {
+  modalHexInput.addEventListener("input", () => {
+    const color = normalizeHex(modalHexInput.value);
+    if (color) updateModalPreview(color);
+  });
+}
 
 closeColorModalBtn.addEventListener("click", closeColorModal);
 

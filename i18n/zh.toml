@@ -186,3 +186,9 @@ other = "$ config: /builder/"
 
 [preview_label]
 other = "$ preview: live-canvas"
+
+[tool_placeholder]
+other = "本主题支持自定义开发此区域，在此添加你的 Canvas 代码，呈现个性化交互工具。"
+
+[title_default]
+other = "测试"

@@ -8,6 +8,18 @@
 {{ define "main" }}
 {{- $toolType := .Params.toolType | default "" -}}
 
+{{ if eq $toolType "" }}
+
+<main class="shell">
+  <div class="tool-placeholder-wrap">
+    <div class="tool-placeholder">
+      <p>{{ i18n "tool_placeholder" }}</p>
+    </div>
+  </div>
+</main>
+
+{{ else }}
+
 <main class="shell">
   <div class="app">
     <aside class="panel">
@@ -53,14 +65,13 @@
     <div class="modal-backdrop" data-close-modal="true"></div>
     <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="colorModalTitle">
       <div class="modal-bar" aria-hidden="true">
-        <span></span>
+        <span id="closeColorModalBtn" style="cursor:pointer"></span>
         <span></span>
         <span></span>
       </div>
       <p class="modal-path">$ background: {{ .Params.slug | default .Slug }}</p>
       <div class="modal-head">
         <h2 id="colorModalTitle">{{ i18n "choose_bg_color" }}</h2>
-        <button id="closeColorModalBtn" class="modal-close" type="button" aria-label="{{ i18n "close_label" }}">{{ i18n "close_label" }}</button>
       </div>
       <div class="modal-preview">
         <span id="modalColorPreview" class="modal-preview-swatch"></span>
@@ -69,29 +80,13 @@
       <div class="modal-section">
         <span class="modal-label">{{ i18n "preset_colors" }}</span>
         <div class="scheme-grid modal-scheme-grid" aria-label="{{ i18n "preset_colors" }}">
-          <button class="scheme-btn modal-bg-btn" type="button" data-modal-bg="#ffffff" aria-label="{{ i18n "white_bg" }}">
-            <span class="scheme-swatch scheme-swatch-bg-white"></span>
-          </button>
-          <button class="scheme-btn modal-bg-btn" type="button" data-modal-bg="#eef2f7" aria-label="{{ i18n "gray_bg" }}">
-            <span class="scheme-swatch scheme-swatch-bg-gray"></span>
-          </button>
-          <button class="scheme-btn modal-bg-btn" type="button" data-modal-bg="#f7f0e8" aria-label="{{ i18n "cream_bg" }}">
-            <span class="scheme-swatch scheme-swatch-bg-cream"></span>
-          </button>
-          <button class="scheme-btn modal-bg-btn" type="button" data-modal-bg="#111827" aria-label="{{ i18n "dark_bg" }}">
-            <span class="scheme-swatch scheme-swatch-bg-dark"></span>
-          </button>
-          <button class="scheme-btn modal-bg-btn" type="button" data-modal-bg="#dbeafe" aria-label="{{ i18n "white_bg" }}">
-            <span class="scheme-swatch scheme-swatch-bg-sky"></span>
-          </button>
-          <button class="scheme-btn modal-bg-btn" type="button" data-modal-bg="#fde68a" aria-label="{{ i18n "white_bg" }}">
-            <span class="scheme-swatch scheme-swatch-bg-gold"></span>
-          </button>
+          <button class="scheme-btn modal-bg-btn" type="button" data-modal-bg="#ffffff" aria-label="{{ i18n "white_bg" }}"><span class="scheme-swatch scheme-swatch-bg-white"></span></button>
+          <button class="scheme-btn modal-bg-btn" type="button" data-modal-bg="#eef2f7" aria-label="{{ i18n "gray_bg" }}"><span class="scheme-swatch scheme-swatch-bg-gray"></span></button>
+          <button class="scheme-btn modal-bg-btn" type="button" data-modal-bg="#f7f0e8" aria-label="{{ i18n "cream_bg" }}"><span class="scheme-swatch scheme-swatch-bg-cream"></span></button>
+          <button class="scheme-btn modal-bg-btn" type="button" data-modal-bg="#111827" aria-label="{{ i18n "dark_bg" }}"><span class="scheme-swatch scheme-swatch-bg-dark"></span></button>
+          <button class="scheme-btn modal-bg-btn" type="button" data-modal-bg="#dbeafe" aria-label="{{ i18n "white_bg" }}"><span class="scheme-swatch scheme-swatch-bg-sky"></span></button>
+          <button class="scheme-btn modal-bg-btn" type="button" data-modal-bg="#fde68a" aria-label="{{ i18n "white_bg" }}"><span class="scheme-swatch scheme-swatch-bg-gold"></span></button>
         </div>
-      </div>
-      <div class="modal-section">
-        <label class="modal-label" for="modalHexInput">{{ i18n "hex_label" }}</label>
-        <input id="modalHexInput" class="modal-input" type="text" value="#ffffff" />
       </div>
       <div class="modal-actions">
         <button id="modalEyedropperBtn" class="modal-btn modal-btn-secondary" type="button">{{ i18n "eyedropper" }}</button>
@@ -125,6 +120,8 @@
   </div>
   {{- end }}
 </main>
+
+{{ end }}
 {{ end }}
 
 {{ define "scripts" }}

@@ -186,3 +186,9 @@ other = "$ config: /builder/"
 
 [preview_label]
 other = "$ preview: live-canvas"
+
+[tool_placeholder]
+other = "This theme supports custom tool development. Add your own canvas code here to build a personalized interactive tool."
+
+[title_default]
+other = "Test"
