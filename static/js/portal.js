@@ -141,6 +141,51 @@ function init() {
   bindLangDropdown(".footer-lang-dropdown", ".footer-lang-trigger", "data-footer-lang-href");
   bindMobileMenu();
 
+  document.querySelectorAll(".card-flip-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const wrap = btn.closest(".card-flip-wrap");
+      if (wrap) wrap.classList.toggle("flipped");
+    });
+  });
+
+  const installSkillBtn = document.getElementById("installSkillBtn");
+  const installSkillModal = document.getElementById("installSkillModal");
+  const closeInstallModalBtn = document.getElementById("closeInstallModalBtn");
+
+  if (installSkillBtn && installSkillModal) {
+    installSkillBtn.addEventListener("click", () => {
+      installSkillModal.hidden = false;
+    });
+    if (closeInstallModalBtn) {
+      closeInstallModalBtn.addEventListener("click", () => {
+        installSkillModal.hidden = true;
+      });
+    }
+    installSkillModal.querySelectorAll("[data-close-modal]").forEach((el) => {
+      el.addEventListener("click", () => { installSkillModal.hidden = true; });
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") installSkillModal.hidden = true;
+    });
+  }
+
+  document.querySelectorAll(".hero-install-copy").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const cmd = btn.dataset.cmd;
+      if (!cmd) return;
+      navigator.clipboard.writeText(cmd).then(() => {
+        const copyLabel = btn.dataset.copyLabel || "Copy";
+        const copiedLabel = btn.dataset.copiedLabel || "Copied!";
+        btn.textContent = copiedLabel;
+        btn.classList.add("copied");
+        setTimeout(() => {
+          btn.textContent = copyLabel;
+          btn.classList.remove("copied");
+        }, 2000);
+      });
+    });
+  });
+
   document.addEventListener("click", (e) => {
     if (e.target instanceof Element && e.target.closest(".header-lang-dropdown, .footer-lang-dropdown")) return;
     closeLangDropdowns();

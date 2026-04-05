@@ -28,7 +28,8 @@
     0 8px 22px rgba(30, 90, 220, 0.32),
     inset 0 1px 0 rgba(255, 255, 255, 0.28);
   --btn-hover-shadow:
-    0 14px 34px rgba(30, 90, 220, 0.44),
+    0 0 0 3px rgba(80, 140, 255, 0.18),
+    0 12px 32px rgba(30, 90, 220, 0.5),
     inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
@@ -62,7 +63,8 @@
     0 8px 24px rgba(50, 100, 240, 0.38),
     inset 0 1px 0 rgba(255, 255, 255, 0.18);
   --btn-hover-shadow:
-    0 14px 36px rgba(50, 100, 240, 0.5),
+    0 0 0 3px rgba(80, 140, 255, 0.22),
+    0 12px 32px rgba(50, 100, 240, 0.56),
     inset 0 1px 0 rgba(255, 255, 255, 0.22);
 }
 
@@ -71,6 +73,7 @@
 html, body {
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
 }
 
 body {
@@ -215,7 +218,8 @@ button {
   color: var(--text);
 }
 
-.mode-btn {
+.mode-btn,
+.install-skill-btn {
   width: 40px;
   height: 40px;
   border-radius: 999px;
@@ -231,14 +235,15 @@ button {
   transition: border-color .18s, background .18s, transform .18s;
 }
 
-:root[data-theme="dark"] .mode-btn {
+:root[data-theme="dark"] .mode-btn,
+:root[data-theme="dark"] .install-skill-btn {
   background: rgba(17, 29, 46, 0.9);
   border-color: #314762;
   color: #c6d8f3;
 }
 
-.mode-btn:hover {
-  transform: translateY(-1px);
+.mode-btn:hover,
+.install-skill-btn:hover {
   border-color: rgba(100, 148, 220, 0.5);
 }
 
@@ -253,11 +258,12 @@ button {
   background: #fff;
   color: #5f7fa5;
   font-size: 18px;
-  line-height: 1;
+  line-height: 40px;
   cursor: pointer;
   align-items: center;
   justify-content: center;
   padding: 0;
+  text-align: center;
   transition: border-color .18s, background .18s;
 }
 
@@ -501,7 +507,7 @@ button {
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 260px;
-  align-items: center;
+  align-items: stretch;
   column-gap: 0;
   padding: 28px 0 28px 36px;
   border: 1px solid var(--line-strong);
@@ -562,7 +568,7 @@ button {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-bottom: 14px;
+  margin-bottom: 28px;
   position: relative;
   z-index: 1;
 }
@@ -620,6 +626,10 @@ button {
   line-height: 1.1;
   letter-spacing: -0.04em;
   color: var(--text);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25em;
 }
 
 .hero-title-accent {
@@ -627,6 +637,7 @@ button {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  white-space: nowrap;
 }
 
 .site-hero-desc {
@@ -672,9 +683,13 @@ button {
 .site-hero-visual {
   position: relative;
   width: 260px;
-  height: 180px;
+  height: 100%;
+  min-height: 180px;
   flex: 0 0 260px;
   z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .visual-orbit-wrap {
@@ -817,7 +832,7 @@ button {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+  transition: box-shadow .22s ease, border-color .22s ease;
 }
 
 .portal-card::before {
@@ -830,17 +845,91 @@ button {
 }
 
 .portal-card:hover {
-  transform: translateY(-3px);
   border-color: rgba(149, 184, 255, 0.32);
   box-shadow:
-    0 40px 100px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(149, 184, 255, 0.18),
+    0 24px 60px rgba(0, 0, 0, 0.6),
     0 2px 0 rgba(255, 255, 255, 0.05) inset;
+}
+
+.card-flip-wrap {
+  perspective: 1200px;
+}
+
+/* ── Hero install block ── */
+
+.hero-install-block {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 18px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--line-strong);
+  background: rgba(0, 0, 0, 0.22);
+  max-width: 480px;
+}
+
+html[data-theme="light"] .hero-install-block {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.hero-install-label {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+}
+
+html[data-theme="light"] .hero-install-label {
+}
+
+.hero-install-cmd {
+  flex: 1;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 12.5px;
+  color: var(--fg);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  background: none;
+}
+
+.hero-install-copy {
+  flex-shrink: 0;
+  padding: 3px 10px;
+  border-radius: 7px;
+  border: 1px solid var(--line-strong);
+  background: transparent;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color .15s, border-color .15s;
+}
+
+.hero-install-copy:hover {
+  color: var(--fg);
+  border-color: rgba(149, 184, 255, 0.5);
+}
+
+.hero-install-copy.copied {
+  color: #5cd4a0;
+  border-color: rgba(92, 212, 160, 0.4);
 }
 
 html[data-theme="light"] .portal-card:hover {
   box-shadow:
-    0 32px 72px rgba(50, 90, 170, 0.18),
+    0 0 0 1px rgba(80, 130, 220, 0.18),
+    0 20px 52px rgba(50, 90, 170, 0.22),
     0 1px 0 rgba(255, 255, 255, 0.95) inset;
+}
+
+html[data-theme="light"] .card-flip-wrap.flipped .portal-card:hover,
+html[data-theme="light"] .card-flip-wrap.flipped .card-back:hover {
+  box-shadow: none;
 }
 
 .card-bar {
@@ -854,11 +943,16 @@ html[data-theme="light"] .portal-card:hover {
   width: 11px;
   height: 11px;
   border-radius: 999px;
+  transition: filter .15s, transform .15s;
 }
 
 .card-bar span:first-child { background: #ff6259; }
 .card-bar span:nth-child(2) { background: #f5be4f; }
 .card-bar span:nth-child(3) { background: #54d060; }
+
+.card-bar span:first-child:hover { filter: brightness(1.3); transform: scale(1.2); }
+.card-bar span:nth-child(2):hover { filter: brightness(1.2); transform: scale(1.15); }
+.card-bar span:nth-child(3):hover { filter: brightness(1.2); transform: scale(1.15); }
 
 .card-path {
   margin: 18px 0 0;
@@ -938,6 +1032,7 @@ html[data-theme="light"] .tool-mark-badge {
   margin-top: 24px;
   display: flex;
   align-items: center;
+  gap: 10px;
   position: relative;
   z-index: 1;
 }
@@ -961,13 +1056,12 @@ html[data-theme="light"] .tool-mark-badge {
 }
 
 .btn:hover {
-  transform: translateY(-2px);
   box-shadow: var(--btn-hover-shadow);
-  filter: brightness(1.08);
+  filter: brightness(1.1);
 }
 
 .btn:active {
-  transform: translateY(0);
+  filter: brightness(0.95);
 }
 
 /* ── Footer ── */
@@ -983,7 +1077,7 @@ html[data-theme="light"] .tool-mark-badge {
   border: 1px solid rgba(117, 164, 228, 0.34);
   border-radius: 40px;
   box-shadow: 0 24px 58px rgba(41, 85, 141, 0.14);
-  padding: 48px 40px 24px;
+  padding: 40px 40px 40px;
 }
 
 :root[data-theme="dark"] .footer-card {
@@ -1286,6 +1380,10 @@ html[data-theme="light"] .tool-mark-badge {
     display: inline-flex;
   }
 
+  #themeToggleBtn {
+    display: none;
+  }
+
   .logo {
     font-size: 15px;
   }
@@ -1342,3 +1440,280 @@ html[data-theme="light"] .tool-mark-badge {
     right: auto;
   }
 }
+
+/* ── Card flip ── */
+
+.card-flip-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.55s cubic-bezier(0.45, 0.05, 0.22, 1.0);
+}
+
+.card-flip-wrap.flipped .card-flip-inner {
+  transform: rotateY(180deg);
+}
+
+.card-flip-wrap.flipped .card-back {
+  pointer-events: auto;
+}
+
+.card-flip-wrap.flipped .card-front {
+  pointer-events: none;
+}
+
+.card-front,
+.card-back {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.card-back {
+  position: absolute;
+  inset: 0;
+  transform: rotateY(180deg);
+  display: flex;
+  pointer-events: none;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.card-back-title {
+  margin: 20px 0 12px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent, #38d7ff);
+  position: relative;
+  z-index: 1;
+}
+
+.card-back-code {
+  flex: 1;
+  margin: 0;
+  padding: 16px 18px;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.28);
+  border: 1px solid var(--line-strong);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 12px;
+  line-height: 1.75;
+  color: var(--fg);
+  overflow-x: auto;
+  white-space: pre;
+  position: relative;
+  z-index: 1;
+}
+
+html[data-theme="light"] .card-back-code {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.hero-install-cmd--multi {
+  white-space: pre-wrap;
+  word-break: break-all;
+  overflow-x: hidden !important;
+  overflow-y: auto;
+  line-height: 1.75;
+  resize: none;
+  display: block;
+  height: 88px;
+  max-width: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.card-install-block {
+  max-width: 100%;
+  margin-top: 0;
+  flex: 1;
+  position: relative;
+  padding-top: 36px;
+  align-items: flex-start;
+  min-height: 0;
+}
+
+.card-install-block .hero-install-label {
+  position: absolute;
+  top: 10px;
+  left: 14px;
+}
+
+.card-install-block .hero-install-copy {
+  position: absolute;
+  top: 8px;
+  right: 14px;
+}
+
+.card-install-block .hero-install-cmd {
+  width: 100%;
+}
+
+.btn-ghost {
+  background: transparent;
+  border: 1px solid var(--line-strong);
+  color: var(--muted);
+  box-shadow: none;
+  gap: 6px;
+}
+
+.btn-icon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+.btn-ghost:hover {
+  border-color: rgba(149, 184, 255, 0.5);
+  color: var(--fg);
+  box-shadow: none;
+  filter: none;
+}
+
+@media (max-width: 500px) {
+  .hero-install-block {
+    max-width: 100%;
+  }
+}
+
+/* ── Modal (shared, used on tools pages) ── */
+
+.modal[hidden] {
+  display: none !important;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+.modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(4, 10, 18, 0.72);
+  backdrop-filter: blur(8px);
+}
+
+.modal-panel {
+  position: relative;
+  width: min(460px, calc(100vw - 32px));
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--card);
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.3);
+  animation: modal-in .22s cubic-bezier(0.34, 1.4, 0.64, 1);
+  box-sizing: border-box;
+}
+
+@keyframes modal-in {
+  from { opacity: 0; transform: scale(0.94) translateY(8px); }
+  to   { opacity: 1; transform: scale(1)   translateY(0); }
+}
+
+.modal-bar {
+  display: flex;
+  gap: 8px;
+}
+
+.modal-bar span {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(217, 230, 255, 0.18);
+  cursor: pointer;
+  transition: filter .15s, transform .15s;
+}
+
+.modal-bar span:first-child { background: #ff6259; }
+.modal-bar span:nth-child(2) { background: #f5be4f; }
+.modal-bar span:nth-child(3) { background: #54d060; }
+
+.modal-bar span:first-child:hover { filter: brightness(1.3); transform: scale(1.2); }
+.modal-bar span:nth-child(2):hover { filter: brightness(1.2); transform: scale(1.15); }
+.modal-bar span:nth-child(3):hover { filter: brightness(1.2); transform: scale(1.15); }
+
+.modal-path {
+  margin: 16px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.modal-head {
+  margin-top: 14px;
+}
+
+.modal-install-block {
+  position: relative;
+  margin-top: 16px;
+  padding: 36px 14px 14px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: rgba(0, 0, 0, 0.12);
+}
+
+html[data-theme="dark"] .modal-install-block {
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.modal-install-block .hero-install-label {
+  position: absolute;
+  top: 10px;
+  left: 14px;
+  width: 20px;
+  height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-install-block .modal-copy-btn {
+  position: absolute;
+  top: 8px;
+  right: 14px;
+  height: 24px;
+  padding: 0 8px;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color .16s, border-color .16s;
+}
+
+.modal-install-block .modal-copy-btn:hover,
+.modal-install-block .modal-copy-btn.copied {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.modal-install-block pre {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border: none;
+  color: var(--text);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 12.5px;
+  line-height: 1.65;
+  height: 88px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  resize: none;
+  white-space: pre-wrap;
+  word-break: break-all;
+  width: 100%;
+  box-sizing: border-box;
+}
+

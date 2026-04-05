@@ -3,13 +3,90 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  {{/* ── Core ── */}}
   <title>{{ block "title" . }}{{ .Site.Title }}{{ end }}</title>
-  <link rel="icon" type="image/jpeg" href="{{ .Site.Params.logoImage | default "/img/logo.jpg" }}" />
+  {{- $desc := "" -}}
+  {{- if .IsHome -}}
+    {{- $desc = .Site.Params.siteDescription | default .Site.Title -}}
+  {{- else -}}
+    {{- $desc = .Params.desc | default .Summary | default .Site.Params.siteDescription | default .Site.Title -}}
+  {{- end -}}
+  <meta name="description" content="{{ $desc }}" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="{{ .Permalink }}" />
+
+  {{/* ── Open Graph ── */}}
+  {{- $ogTitle := "" -}}
+  {{- if .IsHome -}}
+    {{- $ogTitle = .Site.Title -}}
+  {{- else -}}
+    {{- $ogTitle = printf "%s — %s" .Title .Site.Title -}}
+  {{- end -}}
+  {{- $ogImage := .Params.ogImage | default (.Site.Params.ogImage | default (.Site.Params.logoImage | default "/img/logo.png")) -}}
+  {{- $ogImageAbs := $ogImage -}}
+  {{- if not (hasPrefix $ogImage "http") -}}
+    {{- $ogImageAbs = printf "%s%s" (strings.TrimRight "/" .Site.BaseURL) $ogImage -}}
+  {{- end -}}
+  <meta property="og:type" content="{{ if .IsHome }}website{{ else }}article{{ end }}" />
+  <meta property="og:site_name" content="{{ .Site.Title }}" />
+  <meta property="og:title" content="{{ $ogTitle }}" />
+  <meta property="og:description" content="{{ $desc }}" />
+  <meta property="og:url" content="{{ .Permalink }}" />
+  <meta property="og:image" content="{{ $ogImageAbs }}" />
+  <meta property="og:locale" content="{{ .Site.Language.Lang }}" />
+
+  {{/* ── Twitter Card ── */}}
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="{{ $ogTitle }}" />
+  <meta name="twitter:description" content="{{ $desc }}" />
+  <meta name="twitter:image" content="{{ $ogImageAbs }}" />
+  {{- with .Site.Params.twitterHandle }}
+  <meta name="twitter:site" content="{{ . }}" />
+  {{- end }}
+
+  {{/* ── JSON-LD ── */}}
+  {{- if .IsHome }}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "{{ .Site.Title }}",
+    "url": "{{ .Site.BaseURL }}",
+    "description": "{{ $desc }}",
+    "inLanguage": "{{ .Site.Language.Lang }}"
+  }
+  </script>
+  {{- else if eq .Section "tools" }}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "{{ .Title }}",
+    "description": "{{ $desc }}",
+    "url": "{{ .Permalink }}",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Web",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+  {{- end }}
+
+  {{/* ── Favicon ── */}}
+  <link rel="icon" type="image/png" href="{{ .Site.Params.logoImage | default "/img/logo.png" }}" />
+
+  {{/* ── Fonts ── */}}
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&display=swap" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&display=swap" media="print" onload="this.media='all'" />
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&display=swap" /></noscript>
+
+  {{/* ── Theme flash prevention ── */}}
   <script>
     (function () {
       var key = "debuginn_tools_theme";

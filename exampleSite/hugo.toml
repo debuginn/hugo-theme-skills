@@ -4,6 +4,10 @@ theme = "hugo-theme-skills"
 defaultContentLanguage = "en"
 defaultContentLanguageInSubdir = false
 
+[sitemap]
+  changefreq = "weekly"
+  priority = 0.5
+
 [languages]
   [languages.en]
     languageName = "English"
@@ -14,20 +18,27 @@ defaultContentLanguageInSubdir = false
     [languages.en.params]
       langHref = "/"
       langLabel = "EN"
+      siteDescription = "A set of lightweight creative utilities for generating share posters and blog covers. No install needed — open and use."
   [languages.zh]
     languageName = "中文"
     languageCode = "zh-CN"
     weight = 2
     contentDir = "content/zh"
+    title = "Debug客栈 AI 工具站"
     [languages.zh.params]
       langHref = "/zh/"
       langLabel = "中文"
+      brandName = "Debug客栈"
+      siteDescription = "一套轻量级创意工具，用于生成分享海报和博客封面图。无需安装，打开即用。"
 
 [params]
   brandName = "DebugInn"
   logoImage = "/img/logo.png"
+  ogImage = "/img/logo.png"
+  twitterHandle = "@debuginn"
   blogURL = "https://blog.debuginn.com/"
   githubURL = "https://github.com/debuginn"
   copyright = "Open source, freely shared."
   themeName = "hugo-theme-skills"
   themeURL = "https://github.com/debuginn/hugo-theme-skills"
+  installCmd = "/plugin marketplace add debuginn/skills"

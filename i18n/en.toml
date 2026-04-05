@@ -25,6 +25,18 @@ other = "A set of lightweight creative utilities for generating share posters an
 [open_tool]
 other = "$ open tool"
 
+[install_skill]
+other = "Install Skill"
+
+[card_back_close]
+other = "✕ Back"
+
+[copy_cmd]
+other = "Copy"
+
+[copied]
+other = "Copied!"
+
 [copyright]
 other = "© 2026 Debuginn. All rights reserved."
 

@@ -4,6 +4,8 @@ slug: "debuginn-wx-xhs-poster"
 desc: "Upload a screenshot, edit the copy, adjust the background and title colors, preview in real time, and export a square share image."
 toolType: "wx-xhs-poster"
 eyebrow: "# > Tool Overview"
+cardPath: "$ pwd: ~/tools/debuginn-wx-xhs-poster"
+installCode: "git clone https://github.com/debuginn/hugo-theme-skills\ncd hugo-theme-skills\n# Copy /static/js/wx-xhs-poster.js\n# Copy /static/css/wx-xhs-poster.css"
 toolCSS: "/css/wx-xhs-poster.css"
 toolJS: "/js/wx-xhs-poster.js"
 tags: ["Canvas API", "PNG Export", "XHS · WeChat"]

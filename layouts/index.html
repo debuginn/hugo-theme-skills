@@ -34,6 +34,15 @@
         <div class="site-hero-main">
           <h1 class="site-hero-title"><span>{{ i18n "hero_title_prefix" }}</span> <span class="hero-title-accent">{{ i18n "hero_title_accent" }}</span></h1>
           <p class="site-hero-desc">{{ i18n "hero_desc" }}</p>
+          {{- with .Site.Params.installCmd }}
+          <div class="hero-install-block">
+            <span class="hero-install-label" aria-label="Claude Code">
+              <svg width="18" height="18" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M252.8 652.8l167.895-94.295 2.77-8.105-2.77-4.48h-8.11l-28.16-1.705-96-2.56-83.2-3.415-80.64-4.265-20.265-4.27-18.985-24.96 1.92-12.585 17.065-11.52 24.32 2.135 53.975 3.625 81.065 5.545 58.665 3.415 87.04 9.175h13.87l1.92-5.55-4.695-3.41-3.625-3.415-83.84-56.745-90.67-60.16-47.57-34.56L168.96 323.2l-13.015-16.425-5.545-35.84 23.255-25.815 31.36 2.135 7.89 2.13 31.79 24.32 67.84 52.48 88.53 65.28 13.015 10.88 5.12-3.625 0.64-2.56-5.76-9.815-48.215-87.04-51.41-88.53-22.83-36.695-5.97-21.975a107.858 107.858 0 0 1-3.63-26.025l26.67-36.055 14.72-4.69 35.41 4.69 14.935 13.015 21.975 50.345 35.625 79.36 55.255 107.735 16.21 32 8.75 29.655 3.2 9.17h5.545v-5.12l4.48-60.8 8.32-74.45 8.105-96L544 147.84l13.44-32.425 26.665-17.495 20.695 10.025 17.065 24.32-2.345 15.79-10.24 65.92-19.84 103.25-13.015 69.12h7.47l8.745-8.745 34.985-46.505 58.67-73.39 26.025-29.225 30.295-32.215 19.41-15.36h36.695l27.095 40.11-12.16 41.385-37.76 48-31.36 40.535-45.015 60.585-28.16 48.425 2.56 3.84 6.615-0.64L782.08 441.6l54.825-10.025 65.495-11.31 29.655 13.87 3.2 14.08-11.735 28.8-69.975 17.28-82.13 16.425-122.24 29.015-1.495 1.065 1.705 2.135 55.04 5.12 23.47 1.28h57.6l107.305 7.89 28.16 18.56 16.855 22.615-2.775 17.28-43.305 21.975-58.24-13.87-136.11-32.425-46.72-11.735h-6.4v3.84l38.83 37.975 71.25 64.425 89.175 82.99 4.48 20.48-11.52 16.21-12.16-1.705-78.505-58.88-30.295-26.665-68.48-57.6h-4.48v5.97l15.785 23.04 83.415 125.23 4.265 38.4-5.97 12.585-21.55 7.465-23.68-4.265-48.85-68.48-50.35-77.225-40.53-69.12-4.91 2.77-23.89 258.135-11.31 13.225-26.025 10.03-21.545-16.43-11.52-26.665 11.52-52.48 13.865-68.48 11.305-54.4 10.24-67.625 5.975-22.4-0.425-1.495-4.91 0.64-50.985 69.975-77.655 104.745-61.44 65.705-14.72 5.76-25.385-13.225 2.345-23.465 14.295-20.91 84.905-107.945 51.2-66.985 33.07-38.615v-5.545h-2.135l-225.495 146.56-40.105 5.12-17.28-16.215 2.135-26.665 8.105-8.75 67.84-46.72z" fill="#D97757"/></svg>
+            </span>
+            <code class="hero-install-cmd">{{ . }}</code>
+            <button class="hero-install-copy" type="button" data-cmd="{{ . }}" data-copy-label="Copy" data-copied-label="Copied!" aria-label="Copy">Copy</button>
+          </div>
+          {{- end }}
         </div>
       </div>
       <div class="site-hero-visual" aria-hidden="true">
@@ -63,53 +72,91 @@
       {{ range $tools }}
       {{- $toolType := .Params.toolType | default "" -}}
       {{- $slug := .Params.slug | default .Slug -}}
-      <article class="portal-card">
-        <div class="card-bar" aria-hidden="true">
-          <span></span>
-          <span></span>
-          <span></span>
+      {{- $cardPath := .Params.cardPath | default (printf "$ pwd: ~/tools/%s" $slug) -}}
+      {{- $openLabel := .Params.openLabel | default "$ OpenTool" -}}
+      {{- $installCode := .Params.installCode | default "" -}}
+      <div class="card-flip-wrap{{ if $installCode }} has-install{{ end }}">
+        <div class="card-flip-inner">
+
+          {{/* ── Front ── */}}
+          <article class="portal-card card-front">
+            <div class="card-bar" aria-hidden="true">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <p class="card-path">{{ $cardPath }}</p>
+            <div class="tool-mark" aria-hidden="true">
+              <span class="tool-mark-badge">
+                {{- if .Params.cardIcon }}
+                {{ .Params.cardIcon | safeHTML }}
+                {{- else if eq $toolType "wx-xhs-poster" }}
+                <svg class="tool-mark-logo" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="36" y="44" width="184" height="168" rx="34" fill="none" stroke="url(#logoBlue)" stroke-width="12"/>
+                  <rect x="60" y="68" width="136" height="92" rx="20" fill="url(#logoBlueSoft)" opacity="0.22"/>
+                  <path d="M78 142l28-30 24 22 24-28 24 36" fill="none" stroke="url(#logoBlue)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+                  <circle cx="98" cy="96" r="10" fill="url(#logoBlueSoft)"/>
+                  <path d="M76 182h104" fill="none" stroke="url(#logoBlue)" stroke-width="10" stroke-linecap="round"/>
+                  <path d="M76 202h74" fill="none" stroke="url(#logoBlue)" stroke-width="10" stroke-linecap="round" opacity="0.82"/>
+                  <path d="M196 88v92" fill="none" stroke="url(#logoBlue)" stroke-width="10" stroke-linecap="round"/>
+                </svg>
+                {{- else if eq $toolType "blog-cover" }}
+                <svg class="tool-mark-logo" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="34" y="48" width="188" height="160" rx="36" fill="url(#logoBlueSoft)" opacity="0.2"/>
+                  <circle cx="128" cy="126" r="54" fill="url(#logoBlueSoft)" opacity="0.32"/>
+                  <rect x="94" y="66" width="68" height="68" rx="18" fill="none" stroke="url(#logoBlue)" stroke-width="10"/>
+                  <path d="M74 168h108" fill="none" stroke="url(#logoBlue)" stroke-width="12" stroke-linecap="round"/>
+                  <path d="M58 188h140" fill="none" stroke="url(#logoBlue)" stroke-width="10" stroke-linecap="round" opacity="0.82"/>
+                </svg>
+                {{- else }}
+                <svg class="tool-mark-logo" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="36" y="36" width="184" height="184" rx="36" stroke="url(#logoBlue)" stroke-width="12"/>
+                  <path d="M84 128h88M128 84v88" stroke="url(#logoBlueSoft)" stroke-width="12" stroke-linecap="round"/>
+                </svg>
+                {{- end }}
+              </span>
+              <span class="tool-mark-label">{{ .Title }}</span>
+            </div>
+            {{ with .Params.eyebrow }}<p class="eyebrow">{{ . }}</p>{{ end }}
+            <p class="lead"><span>{{ with .Params.desc }}{{ . }}{{ else }}{{ .Summary }}{{ end }}</span></p>
+            <div class="hero-actions">
+              <a class="btn btn-solid" href="{{ .RelPermalink }}">{{ $openLabel }}</a>
+              {{- if $installCode }}
+              <button class="btn btn-ghost card-flip-btn" type="button" aria-label="Install Skill"><svg class="btn-icon" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M252.8 652.8l167.895-94.295 2.77-8.105-2.77-4.48h-8.11l-28.16-1.705-96-2.56-83.2-3.415-80.64-4.265-20.265-4.27-18.985-24.96 1.92-12.585 17.065-11.52 24.32 2.135 53.975 3.625 81.065 5.545 58.665 3.415 87.04 9.175h13.87l1.92-5.55-4.695-3.41-3.625-3.415-83.84-56.745-90.67-60.16-47.57-34.56L168.96 323.2l-13.015-16.425-5.545-35.84 23.255-25.815 31.36 2.135 7.89 2.13 31.79 24.32 67.84 52.48 88.53 65.28 13.015 10.88 5.12-3.625 0.64-2.56-5.76-9.815-48.215-87.04-51.41-88.53-22.83-36.695-5.97-21.975a107.858 107.858 0 0 1-3.63-26.025l26.67-36.055 14.72-4.69 35.41 4.69 14.935 13.015 21.975 50.345 35.625 79.36 55.255 107.735 16.21 32 8.75 29.655 3.2 9.17h5.545v-5.12l4.48-60.8 8.32-74.45 8.105-96L544 147.84l13.44-32.425 26.665-17.495 20.695 10.025 17.065 24.32-2.345 15.79-10.24 65.92-19.84 103.25-13.015 69.12h7.47l8.745-8.745 34.985-46.505 58.67-73.39 26.025-29.225 30.295-32.215 19.41-15.36h36.695l27.095 40.11-12.16 41.385-37.76 48-31.36 40.535-45.015 60.585-28.16 48.425 2.56 3.84 6.615-0.64L782.08 441.6l54.825-10.025 65.495-11.31 29.655 13.87 3.2 14.08-11.735 28.8-69.975 17.28-82.13 16.425-122.24 29.015-1.495 1.065 1.705 2.135 55.04 5.12 23.47 1.28h57.6l107.305 7.89 28.16 18.56 16.855 22.615-2.775 17.28-43.305 21.975-58.24-13.87-136.11-32.425-46.72-11.735h-6.4v3.84l38.83 37.975 71.25 64.425 89.175 82.99 4.48 20.48-11.52 16.21-12.16-1.705-78.505-58.88-30.295-26.665-68.48-57.6h-4.48v5.97l15.785 23.04 83.415 125.23 4.265 38.4-5.97 12.585-21.55 7.465-23.68-4.265-48.85-68.48-50.35-77.225-40.53-69.12-4.91 2.77-23.89 258.135-11.31 13.225-26.025 10.03-21.545-16.43-11.52-26.665 11.52-52.48 13.865-68.48 11.305-54.4 10.24-67.625 5.975-22.4-0.425-1.495-4.91 0.64-50.985 69.975-77.655 104.745-61.44 65.705-14.72 5.76-25.385-13.225 2.345-23.465 14.295-20.91 84.905-107.945 51.2-66.985 33.07-38.615v-5.545h-2.135l-225.495 146.56-40.105 5.12-17.28-16.215 2.135-26.665 8.105-8.75 67.84-46.72z" fill="#D97757"/></svg>InstallSkill</button>
+              {{- end }}
+            </div>
+            {{ with .Params.tags }}
+            <div class="card-tags">
+              {{ range . }}<span class="card-tag">{{ . }}</span>{{ end }}
+            </div>
+            {{ end }}
+          </article>
+
+          {{/* ── Back ── */}}
+          {{- if $installCode }}
+          <div class="portal-card card-back">
+            <div class="card-bar" aria-hidden="true">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <p class="card-path">$ install: ~/tools/{{ $slug }}</p>
+            <p class="card-back-title">Install Skill</p>
+            <div class="hero-install-block card-install-block">
+              <span class="hero-install-label" aria-label="Claude Code">
+                <svg width="18" height="18" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M252.8 652.8l167.895-94.295 2.77-8.105-2.77-4.48h-8.11l-28.16-1.705-96-2.56-83.2-3.415-80.64-4.265-20.265-4.27-18.985-24.96 1.92-12.585 17.065-11.52 24.32 2.135 53.975 3.625 81.065 5.545 58.665 3.415 87.04 9.175h13.87l1.92-5.55-4.695-3.41-3.625-3.415-83.84-56.745-90.67-60.16-47.57-34.56L168.96 323.2l-13.015-16.425-5.545-35.84 23.255-25.815 31.36 2.135 7.89 2.13 31.79 24.32 67.84 52.48 88.53 65.28 13.015 10.88 5.12-3.625 0.64-2.56-5.76-9.815-48.215-87.04-51.41-88.53-22.83-36.695-5.97-21.975a107.858 107.858 0 0 1-3.63-26.025l26.67-36.055 14.72-4.69 35.41 4.69 14.935 13.015 21.975 50.345 35.625 79.36 55.255 107.735 16.21 32 8.75 29.655 3.2 9.17h5.545v-5.12l4.48-60.8 8.32-74.45 8.105-96L544 147.84l13.44-32.425 26.665-17.495 20.695 10.025 17.065 24.32-2.345 15.79-10.24 65.92-19.84 103.25-13.015 69.12h7.47l8.745-8.745 34.985-46.505 58.67-73.39 26.025-29.225 30.295-32.215 19.41-15.36h36.695l27.095 40.11-12.16 41.385-37.76 48-31.36 40.535-45.015 60.585-28.16 48.425 2.56 3.84 6.615-0.64L782.08 441.6l54.825-10.025 65.495-11.31 29.655 13.87 3.2 14.08-11.735 28.8-69.975 17.28-82.13 16.425-122.24 29.015-1.495 1.065 1.705 2.135 55.04 5.12 23.47 1.28h57.6l107.305 7.89 28.16 18.56 16.855 22.615-2.775 17.28-43.305 21.975-58.24-13.87-136.11-32.425-46.72-11.735h-6.4v3.84l38.83 37.975 71.25 64.425 89.175 82.99 4.48 20.48-11.52 16.21-12.16-1.705-78.505-58.88-30.295-26.665-68.48-57.6h-4.48v5.97l15.785 23.04 83.415 125.23 4.265 38.4-5.97 12.585-21.55 7.465-23.68-4.265-48.85-68.48-50.35-77.225-40.53-69.12-4.91 2.77-23.89 258.135-11.31 13.225-26.025 10.03-21.545-16.43-11.52-26.665 11.52-52.48 13.865-68.48 11.305-54.4 10.24-67.625 5.975-22.4-0.425-1.495-4.91 0.64-50.985 69.975-77.655 104.745-61.44 65.705-14.72 5.76-25.385-13.225 2.345-23.465 14.295-20.91 84.905-107.945 51.2-66.985 33.07-38.615v-5.545h-2.135l-225.495 146.56-40.105 5.12-17.28-16.215 2.135-26.665 8.105-8.75 67.84-46.72z" fill="#D97757"/></svg>
+              </span>
+              <pre class="hero-install-cmd hero-install-cmd--multi">{{ $installCode | replaceRE `\\n` "\n" }}</pre>
+              <button class="hero-install-copy" type="button" data-cmd="{{ $installCode | replaceRE `\\n` "\n" }}" data-copy-label="Copy" data-copied-label="Copied!" aria-label="Copy">Copy</button>
+            </div>
+            <div class="hero-actions">
+              <button class="btn btn-ghost card-flip-btn" type="button">✕ Back</button>
+            </div>
+          </div>
+          {{- end }}
+
         </div>
-        <p class="card-path">$ pwd: ~/tools/{{ $slug }}</p>
-        <div class="tool-mark" aria-hidden="true">
-          <span class="tool-mark-badge">
-            {{- if eq $toolType "wx-xhs-poster" }}
-            <svg class="tool-mark-logo" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="36" y="44" width="184" height="168" rx="34" fill="none" stroke="url(#logoBlue)" stroke-width="12"/>
-              <rect x="60" y="68" width="136" height="92" rx="20" fill="url(#logoBlueSoft)" opacity="0.22"/>
-              <path d="M78 142l28-30 24 22 24-28 24 36" fill="none" stroke="url(#logoBlue)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
-              <circle cx="98" cy="96" r="10" fill="url(#logoBlueSoft)"/>
-              <path d="M76 182h104" fill="none" stroke="url(#logoBlue)" stroke-width="10" stroke-linecap="round"/>
-              <path d="M76 202h74" fill="none" stroke="url(#logoBlue)" stroke-width="10" stroke-linecap="round" opacity="0.82"/>
-              <path d="M196 88v92" fill="none" stroke="url(#logoBlue)" stroke-width="10" stroke-linecap="round"/>
-            </svg>
-            {{- else if eq $toolType "blog-cover" }}
-            <svg class="tool-mark-logo" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="34" y="48" width="188" height="160" rx="36" fill="url(#logoBlueSoft)" opacity="0.2"/>
-              <circle cx="128" cy="126" r="54" fill="url(#logoBlueSoft)" opacity="0.32"/>
-              <rect x="94" y="66" width="68" height="68" rx="18" fill="none" stroke="url(#logoBlue)" stroke-width="10"/>
-              <path d="M74 168h108" fill="none" stroke="url(#logoBlue)" stroke-width="12" stroke-linecap="round"/>
-              <path d="M58 188h140" fill="none" stroke="url(#logoBlue)" stroke-width="10" stroke-linecap="round" opacity="0.82"/>
-            </svg>
-            {{- else }}
-            <svg class="tool-mark-logo" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="36" y="36" width="184" height="184" rx="36" stroke="url(#logoBlue)" stroke-width="12"/>
-              <path d="M84 128h88M128 84v88" stroke="url(#logoBlueSoft)" stroke-width="12" stroke-linecap="round"/>
-            </svg>
-            {{- end }}
-          </span>
-          <span class="tool-mark-label">{{ .Title }}</span>
-        </div>
-        {{ with .Params.eyebrow }}<p class="eyebrow">{{ . }}</p>{{ end }}
-        <p class="lead"><span>{{ with .Params.desc }}{{ . }}{{ else }}{{ .Summary }}{{ end }}</span></p>
-        <div class="hero-actions">
-          <a class="btn btn-solid" href="{{ .RelPermalink }}">$ open tool</a>
-        </div>
-        {{ with .Params.tags }}
-        <div class="card-tags">
-          {{ range . }}<span class="card-tag">{{ . }}</span>{{ end }}
-        </div>
-        {{ end }}
-      </article>
+      </div>
       {{ end }}
     </div>
   </section>
