@@ -1233,6 +1233,7 @@ html[data-theme="light"] .social-link:hover {
   display: flex;
   gap: 16px;
   flex-wrap: wrap;
+  margin-top: 12px;
 }
 
 .footer-inline-links a {

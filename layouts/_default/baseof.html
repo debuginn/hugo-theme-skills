@@ -104,6 +104,17 @@
     })();
   </script>
   {{ block "styles" . }}<link rel="stylesheet" href="{{ "css/portal.css" | relURL }}" />{{ end }}
+
+  {{/* ── Google Analytics ── */}}
+  {{- with .Site.Params.googleAnalytics }}
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ . }}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '{{ . }}');
+  </script>
+  {{- end }}
 </head>
 <body>
   {{ partial "header.html" . }}
