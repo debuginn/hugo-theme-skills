@@ -26,8 +26,9 @@ Tools live in the `tools` section. Front matter keys that drive behavior:
 |-----|---------|
 | `toolType` | Selects which controls partial and canvas JS/CSS to load (`wx-xhs-poster`, `blog-cover`) |
 | `toolCSS` / `toolJS` | Per-tool static asset paths |
-| `installCode` | If present, enables card flip and install modal |
-| `cardPath` | Terminal-style path shown on the card (e.g. `$ pwd: ~/tools/…`) |
+| `installCode` | If present, enables card flip and back-face install block |
+| `buttons` | Array controlling which buttons appear on the card front. Values: `"open"`, `"install"`. Defaults to `["open"]` (+ `"install"` when `installCode` is set). Use `["install"]` for skill-only cards with no tool page. |
+| `openLabel` | Custom label for the open button; defaults to `"$ OpenTool"` |
 | `tags` | Tag array for categorization |
 | `cardIcon` | Custom SVG icon; falls back to type-based icon |
 
