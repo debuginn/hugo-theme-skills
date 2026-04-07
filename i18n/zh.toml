@@ -14,13 +14,13 @@ other = "博客"
 other = "GitHub"
 
 [hero_title_prefix]
-other = "Debug客栈"
+other = "Hugo"
 
 [hero_title_accent]
-other = "Tools & Skills"
+other = "Theme Skills"
 
 [hero_desc]
-other = "一套轻量级创意工具，用于生成分享海报和博客封面图。无需安装，打开即用。"
+other = "一款轻量、简洁、美观的 skill & tool 介绍与工具页的 hugo 主题。"
 
 [open_tool]
 other = "$ 打开工具"
@@ -56,7 +56,7 @@ other = "切换语言"
 other = "语言选项"
 
 [tools_tag]
-other = "Tools & Skills"
+other = "Tools & Skills Introduction Website"
 
 [footer_tools]
 other = "工具"

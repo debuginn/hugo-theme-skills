@@ -747,15 +747,11 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 10px;
-  background: linear-gradient(145deg, rgba(60,100,200,0.3), rgba(20,40,100,0.2));
-  border: 1px solid rgba(100,160,255,0.3);
-  box-shadow: 0 0 20px rgba(60,110,255,0.3);
 }
 
 .visual-center-logo {
-  width: 22px;
-  height: 22px;
+  width: 36px;
+  height: 36px;
   border-radius: 4px;
   object-fit: cover;
 }
@@ -823,8 +819,8 @@ button {
   position: absolute;
   bottom: 20px;
   right: 20px;
-  width: 24px;
-  height: 24px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   border: 1px solid var(--line-strong);
   background: var(--card-surface);
@@ -838,8 +834,8 @@ button {
 }
 
 .card-github-btn svg {
-  width: 12px;
-  height: 12px;
+  width: 16px;
+  height: 16px;
 }
 
 .card-github-btn:hover {
@@ -892,6 +888,7 @@ button {
 
 .card-flip-wrap {
   perspective: 1200px;
+  display: grid;
 }
 
 /* ── Hero install block ── */
@@ -934,6 +931,14 @@ html[data-theme="light"] .hero-install-block {
   overflow: hidden;
   text-overflow: ellipsis;
   background: none;
+}
+
+.hero-install-cmd.hero-install-cmd--multi {
+  white-space: pre-wrap !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  flex: none;
+  width: 100%;
 }
 
 .hero-install-copy {
@@ -1126,7 +1131,7 @@ html[data-theme="light"] .tool-mark-badge {
   border: 1px solid rgba(117, 164, 228, 0.34);
   border-radius: 40px;
   box-shadow: 0 24px 58px rgba(41, 85, 141, 0.14);
-  padding: 40px 40px 40px;
+  padding: 40px 40px 24px;
 }
 
 :root[data-theme="dark"] .footer-card {
@@ -1279,7 +1284,7 @@ html[data-theme="light"] .social-link:hover {
   display: flex;
   gap: 16px;
   flex-wrap: wrap;
-  margin-top: 12px;
+  margin-top: 16px;
 }
 
 .footer-inline-links a {
@@ -1298,14 +1303,14 @@ html[data-theme="light"] .social-link:hover {
 }
 
 .footer-bottom {
-  margin-top: 14px;
+  margin-top: 8px;
   min-height: 40px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   color: #6f89a9;
   font-size: 12px;
-  padding-top: 14px;
+  padding-top: 8px;
   gap: 12px;
   flex-wrap: wrap;
 }
@@ -1504,6 +1509,29 @@ html[data-theme="light"] .social-link:hover {
   .portal-grid {
     grid-template-columns: 1fr;
   }
+
+  .card-flip-wrap.has-install {
+    min-height: 320px;
+    height: 320px;
+  }
+
+  .card-flip-wrap.has-install .card-flip-inner {
+    height: 320px;
+    min-height: 320px;
+  }
+
+  .card-flip-wrap.has-install .card-back {
+    min-height: 320px;
+  }
+
+  .card-flip-wrap.has-install .card-install-block {
+    min-height: 200px;
+  }
+
+  .card-flip-wrap.has-install .hero-install-cmd--multi {
+    min-height: 140px;
+    height: 140px;
+  }
 }
 
 @media (max-width: 720px) {
@@ -1602,6 +1630,7 @@ html[data-theme="light"] .social-link:hover {
   position: relative;
   width: 100%;
   height: 100%;
+  min-height: inherit;
   transform-style: preserve-3d;
   transition: transform 0.55s cubic-bezier(0.45, 0.05, 0.22, 1.0);
 }
@@ -1667,14 +1696,16 @@ html[data-theme="light"] .card-back-code {
 }
 
 .hero-install-cmd--multi {
-  white-space: pre-wrap;
+  white-space: pre-wrap !important;
   word-break: break-all;
   overflow-x: hidden !important;
   overflow-y: auto;
+  text-overflow: clip !important;
   line-height: 1.75;
   resize: none;
   display: block;
-  height: 88px;
+  height: auto;
+  min-height: 120px;
   max-width: 100%;
   width: 100%;
   box-sizing: border-box;
@@ -1683,12 +1714,16 @@ html[data-theme="light"] .card-back-code {
 
 .card-install-block {
   max-width: 100%;
+  width: 100%;
   margin-top: 0;
   flex: 1;
   position: relative;
   padding-top: 36px;
-  align-items: flex-start;
   min-height: 0;
+  overflow: hidden;
+  box-sizing: border-box;
+  /* 覆盖 hero-install-block 的横向 flex */
+  display: block;
 }
 
 .card-install-block .hero-install-label {
@@ -1705,6 +1740,11 @@ html[data-theme="light"] .card-back-code {
 
 .card-install-block .hero-install-cmd {
   width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  flex: 1;
+  min-width: 0;
 }
 
 .btn-ghost {

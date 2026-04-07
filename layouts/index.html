@@ -143,7 +143,7 @@
           {{- if $showInstall }}
           <div class="portal-card card-back">
             <div class="card-bar" aria-hidden="true">
-              <span></span>
+              <span class="card-flip-btn" aria-label="Close" style="cursor:pointer;"></span>
               <span></span>
               <span></span>
             </div>
@@ -154,9 +154,6 @@
               </span>
               <pre class="hero-install-cmd hero-install-cmd--multi">{{ $installCode | replaceRE `\\n` "\n" }}</pre>
               <button class="hero-install-copy" type="button" data-cmd="{{ $installCode | replaceRE `\\n` "\n" }}" data-copy-label="Copy" data-copied-label="Copied!" aria-label="Copy">Copy</button>
-            </div>
-            <div class="hero-actions">
-              <button class="btn btn-ghost card-flip-btn" type="button">✕ Back</button>
             </div>
           </div>
           {{- end }}

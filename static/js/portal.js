@@ -177,6 +177,21 @@ function init() {
     });
   });
 
+  document.querySelectorAll(".card-back").forEach((back) => {
+    back.addEventListener("click", (e) => {
+      if (e.target.closest(".card-install-block")) return;
+      if (e.target.closest(".card-flip-btn")) return;
+      e.stopPropagation();
+    });
+  });
+
+  document.addEventListener("click", (e) => {
+    if (e.target.closest(".card-flip-wrap")) return;
+    document.querySelectorAll(".card-flip-wrap.flipped").forEach((wrap) => {
+      wrap.classList.remove("flipped");
+    });
+  });
+
   const installSkillBtn = document.getElementById("installSkillBtn");
   const installSkillModal = document.getElementById("installSkillModal");
   const closeInstallModalBtn = document.getElementById("closeInstallModalBtn");

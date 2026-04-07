@@ -1,5 +1,5 @@
 baseURL = "https://example.com/"
-title = "DebugInn AI 工具站"
+title = "AI Skills & Tools 工具站"
 theme = "hugo-theme-skills"
 defaultContentLanguage = "en"
 defaultContentLanguageInSubdir = false
@@ -14,7 +14,7 @@ defaultContentLanguageInSubdir = false
     languageCode = "en"
     weight = 1
     contentDir = "content"
-    title = "DebugInn AI Tools"
+    title = "AI Skills & Tools"
     [languages.en.params]
       langHref = "/"
       langLabel = "EN"
@@ -24,7 +24,7 @@ defaultContentLanguageInSubdir = false
     languageCode = "zh-CN"
     weight = 2
     contentDir = "content/zh"
-    title = "Debug客栈 AI 工具站"
+    title = "AI Skills & Tools 工具站"
     [languages.zh.params]
       langHref = "/zh/"
       langLabel = "中文"
