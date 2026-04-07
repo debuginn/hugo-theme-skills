@@ -803,6 +803,36 @@ button {
   align-items: center;
 }
 
+.card-github-btn {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--line-strong);
+  background: var(--card-surface);
+  color: var(--muted);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: color .18s ease, border-color .18s ease, background .18s ease, transform .18s ease;
+  z-index: 2;
+}
+
+.card-github-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.card-github-btn:hover {
+  color: var(--fg);
+  border-color: rgba(149, 184, 255, 0.5);
+  background: rgba(100, 160, 255, 0.12);
+  transform: scale(1.1);
+}
+
 .portal-grid {
   width: 100%;
   display: grid;
