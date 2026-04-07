@@ -29,6 +29,7 @@ Tools live in the `tools` section. Front matter keys that drive behavior:
 | `installCode` | If present, enables card flip and back-face install block |
 | `buttons` | Array controlling which buttons appear on the card front. Values: `"open"`, `"install"`. Defaults to `["open"]` (+ `"install"` when `installCode` is set). Use `["install"]` for skill-only cards with no tool page. |
 | `openLabel` | Custom label for the open button; defaults to `"$ OpenTool"` |
+| `githubRepo` | GitHub URL; when set, renders a circular GitHub icon link at the bottom-right of the card |
 | `tags` | Tag array for categorization |
 | `cardIcon` | Custom SVG icon; falls back to type-based icon |
 
