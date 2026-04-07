@@ -807,8 +807,8 @@ button {
   position: absolute;
   bottom: 20px;
   right: 20px;
-  width: 32px;
-  height: 32px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   border: 1px solid var(--line-strong);
   background: var(--card-surface);
@@ -822,8 +822,8 @@ button {
 }
 
 .card-github-btn svg {
-  width: 16px;
-  height: 16px;
+  width: 12px;
+  height: 12px;
 }
 
 .card-github-btn:hover {
