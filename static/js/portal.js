@@ -113,12 +113,41 @@ function bindMobileMenu() {
   });
 }
 
+function initBounceTitle() {
+  const el = document.querySelector(".hero-title-accent");
+  if (!el) return;
+  const text = el.textContent;
+  const totalW = el.getBoundingClientRect().width || 200;
+  el.style.background = "none";
+  el.style.webkitTextFillColor = "";
+  el.innerHTML = "";
+  let offsetX = 0;
+  [...text].forEach((c, i) => {
+    const span = document.createElement("span");
+    if (c === " ") {
+      span.innerHTML = "&nbsp;";
+      span.style.display = "inline-block";
+      el.appendChild(span);
+      offsetX += totalW * 0.06;
+      return;
+    }
+    span.className = "bounce-char";
+    span.textContent = c;
+    span.style.animationDelay = `${i * 60}ms`;
+    span.style.backgroundSize = `${totalW}px 100%`;
+    span.style.backgroundPosition = `-${offsetX}px 0`;
+    el.appendChild(span);
+    offsetX += span.getBoundingClientRect().width || totalW / text.length;
+  });
+}
+
 function init() {
   let themePref = readThemePref();
   const themeBtn = document.querySelector(".mode-btn");
 
   applyThemePref(themePref);
   updateThemeButton(themePref, themeBtn);
+  (document.fonts ? document.fonts.ready : Promise.resolve()).then(initBounceTitle);
 
   if (themeBtn) {
     themeBtn.addEventListener("click", () => {

@@ -632,6 +632,22 @@ button {
   white-space: nowrap;
 }
 
+@keyframes bounce-char {
+  0%, 60%, 100% { transform: translateY(0); animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1); }
+  30%           { transform: translateY(-0.35em); animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06); }
+  45%           { transform: translateY(-0.18em); animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1); }
+  55%           { transform: translateY(-0.08em); }
+}
+
+.bounce-char {
+  display: inline-block;
+  background: linear-gradient(135deg, #7eb3ff 0%, #5cd4a0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: bounce-char 3s infinite both;
+}
+
 .site-hero-desc {
   margin: 0;
   font-size: 13px;
