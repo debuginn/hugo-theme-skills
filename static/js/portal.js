@@ -1,5 +1,15 @@
 const THEME_KEY = "debuginn_tools_theme";
 const THEME_PREFS = ["auto", "dark", "light"];
+const LANG_KEY = "debuginn_tools_lang";
+
+function autoDetectLang() {
+  try { if (localStorage.getItem(LANG_KEY)) return; } catch (_) {}
+  const lang = (navigator.language || "").toLowerCase();
+  if (!lang.startsWith("zh")) return;
+  const path = location.pathname;
+  if (path.startsWith("/zh")) return;
+  location.replace("/zh" + (path === "/" ? "/" : path) + location.search + location.hash);
+}
 
 function detectTheme() {
   return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
@@ -65,7 +75,10 @@ function bindLangDropdown(dropdownSel, triggerSel, optionAttr) {
     options.forEach((option) => {
       option.addEventListener("click", () => {
         const href = option.getAttribute(optionAttr);
-        if (href) window.location.href = href;
+        if (href) {
+          try { localStorage.setItem(LANG_KEY, "manual"); } catch (_) {}
+          window.location.href = href;
+        }
       });
     });
   });
@@ -166,6 +179,7 @@ function init() {
     });
   }
 
+  autoDetectLang();
   bindLangDropdown(".header-lang-dropdown", ".header-lang-trigger", "data-lang-href");
   bindLangDropdown(".footer-lang-dropdown", ".footer-lang-trigger", "data-footer-lang-href");
   bindMobileMenu();
