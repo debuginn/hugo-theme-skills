@@ -5,6 +5,8 @@
 [![ExampleSite](https://img.shields.io/badge/exampleSite-included-2b7bff)](./exampleSite)
 [![Multilingual](https://img.shields.io/badge/i18n-supported-1f9d55)](#i18n)
 
+[中文文档](./README.zh.md)
+
 Skills is a Hugo theme for interactive tool & skill portal sites with a terminal/CLI aesthetic:
 
 - a portal homepage with animated hero and tool card grid
