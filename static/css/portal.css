@@ -653,7 +653,8 @@ button {
   font-size: 13px;
   line-height: 1.8;
   color: var(--lead-text);
-  max-width: 480px;
+  width: max-content;
+  max-width: 100%;
 }
 
 .hero-stat {
