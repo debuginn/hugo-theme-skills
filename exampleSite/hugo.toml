@@ -1,8 +1,11 @@
-baseURL = "https://example.com/"
+baseURL = "https://skills.debuginn.com/"
 title = "AI Skills & Tools 工具站"
-theme = "hugo-theme-skills"
 defaultContentLanguage = "en"
 defaultContentLanguageInSubdir = false
+
+[module]
+  [[module.imports]]
+    path = "github.com/debuginn/hugo-theme-skills"
 
 [sitemap]
   changefreq = "weekly"

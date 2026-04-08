@@ -1,0 +1,50 @@
+name: Deploy Example Site
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "^1.21"
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: "0.147.1"
+          extended: true
+
+      - name: Cache Hugo resources
+        uses: actions/cache@v4
+        with:
+          path: exampleSite/resources
+          key: hugo-resources-${{ hashFiles('exampleSite/go.sum', 'static/**', 'layouts/**', 'i18n/**') }}
+
+      - name: Build site
+        run: |
+          cd exampleSite
+          hugo --minify --gc
+
+      - name: Deploy to gh-pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: exampleSite/public
+          clean: true
+          single-commit: true
