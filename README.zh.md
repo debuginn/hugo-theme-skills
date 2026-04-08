@@ -2,41 +2,57 @@
 
 [![最低 Hugo 版本](https://img.shields.io/static/v1?label=min-HUGO-version&message=%3E%3Dv0.115.0&color=blue&logo=hugo)](https://github.com/gohugoio/hugo/releases/tag/v0.115.0)
 [![开源协议](https://img.shields.io/github/license/debuginn/hugo-theme-skills)](https://github.com/debuginn/hugo-theme-skills/blob/main/LICENSE)
-[![示例站点](https://img.shields.io/badge/exampleSite-included-2b7bff)](./exampleSite)
-[![多语言](https://img.shields.io/badge/i18n-supported-1f9d55)](#i18n)
+[![示例站点](https://img.shields.io/badge/exampleSite-skills.debuginn.com-2b7bff)](https://skills.debuginn.com)
+[![多语言](https://img.shields.io/badge/i18n-EN%20%2F%20ZH-1f9d55)](#i18n)
+[![部署状态](https://github.com/debuginn/hugo-theme-skills/actions/workflows/deploy.yml/badge.svg)](https://github.com/debuginn/hugo-theme-skills/actions/workflows/deploy.yml)
 
-Skills 是一款具有终端/命令行风格的 Hugo 主题，适用于构建交互式工具与技能门户站点：
+[English](./README.md)
+
+**hugo-theme-skills** 是一款具有终端/命令行风格的 Hugo 主题，适用于构建 Skills & Tools 门户站点：
 
 - 带动画 Hero 区域与工具卡片网格的门户首页
 - 卡片翻转交互，展示技能安装指引
-- 基于 Canvas 的交互式工具（海报生成器、博客封面生成器）
 - 多语言路由（EN / ZH）
 - 暗色模式（带防闪烁处理）
+- 自动检测浏览器语言并跳转
 
 ## 环境要求
 
-- Hugo `>= 0.115.0`（如需自定义样式，建议使用 extended 版本）
-- 一个提供内容、`i18n/` 和配置文件的 Hugo 站点
+- Hugo `>= 0.115.0`（建议使用 extended 版本）
+- Go `>= 1.21`（Hugo Module 依赖）
 
 ## 安装
 
-将主题添加为 git 子模块：
+### Hugo Module（推荐）
+
+若站点尚未初始化为 Hugo Module，先执行：
+
+```bash
+hugo mod init github.com/yourname/your-site
+```
+
+在 `hugo.toml` 中引入主题：
+
+```toml
+[module]
+  [[module.imports]]
+    path = "github.com/debuginn/hugo-theme-skills"
+```
+
+拉取主题：
+
+```bash
+hugo mod get github.com/debuginn/hugo-theme-skills
+hugo mod tidy
+```
+
+### Git Submodule
 
 ```bash
 git submodule add https://github.com/debuginn/hugo-theme-skills themes/hugo-theme-skills
 ```
 
-在站点配置中启用主题：
-
-```toml
-theme = "hugo-theme-skills"
-```
-
-在主题仓库中本地运行示例站点：
-
-```bash
-cd exampleSite && hugo server
-```
+然后在 `hugo.toml` 中设置 `theme = "hugo-theme-skills"`。
 
 ## 快速开始
 
@@ -63,9 +79,12 @@ hugo.toml
 ```toml
 baseURL = "https://example.com/"
 title = "我的 Skills & Tools"
-theme = "hugo-theme-skills"
 defaultContentLanguage = "en"
 defaultContentLanguageInSubdir = false
+
+[module]
+  [[module.imports]]
+    path = "github.com/debuginn/hugo-theme-skills"
 
 [languages]
   [languages.en]
@@ -99,25 +118,10 @@ defaultContentLanguageInSubdir = false
   installCmd = "/plugin marketplace add yourname/skills"
 ```
 
-工具 front matter 示例（`content/tools/my-tool.md`）：
+本地运行示例站点：
 
-```yaml
----
-title: "我的工具"
-slug: "my-tool"
-desc: "显示在卡片上的一行描述。"
-toolType: "wx-xhs-poster"
-toolCSS: "/css/wx-xhs-poster.css"
-toolJS: "/js/wx-xhs-poster.js"
-installCode: |
-  /plugin install my-tool
-buttons: ["open", "install"]
-githubRepo: "https://github.com/yourname/repo"
-tags: ["海报", "Canvas"]
-weight: 1
----
-
-显示在工具详情页的完整描述。
+```bash
+cd exampleSite && hugo server
 ```
 
 ## 内容模型
@@ -126,7 +130,7 @@ weight: 1
 
 | 字段 | 说明 |
 |------|------|
-| `toolType` | 指定加载的控制面板 partial 和 Canvas 资源（`wx-xhs-poster`、`blog-cover`） |
+| `toolType` | 指定加载的控制面板 partial 和 Canvas 资源 |
 | `toolCSS` / `toolJS` | 工具专属静态资源路径 |
 | `installCode` | 若存在，启用卡片翻转并在背面展示安装指令块 |
 | `buttons` | 控制卡片正面按钮的数组，可选值：`"open"`、`"install"`。默认为 `["open"]`（设置了 `installCode` 时自动加上 `"install"`）。纯技能卡片可设为 `["install"]`。 |
@@ -134,6 +138,23 @@ weight: 1
 | `githubRepo` | GitHub 仓库地址，设置后在卡片右下角渲染圆形 GitHub 图标链接 |
 | `tags` | 标签数组，用于分类 |
 | `cardIcon` | 自定义内联 SVG 图标，未设置时回退到类型默认图标 |
+
+工具 front matter 示例（`content/tools/my-tool.md`）：
+
+```yaml
+---
+title: "我的工具"
+slug: "my-tool"
+desc: "显示在卡片上的一行描述。"
+installCode: "# 安装\n/plugin install my-tool"
+buttons: ["open", "install"]
+githubRepo: "https://github.com/yourname/repo"
+tags: ["工具", "Claude"]
+weight: 1
+---
+
+显示在工具详情页的完整描述。
+```
 
 ## i18n
 
@@ -143,11 +164,6 @@ weight: 1
 
 - `en`（默认，访问路径 `/`）
 - `zh`（访问路径 `/zh/`）
-
-各语言内容分目录存放：
-
-- `content/tools/` → 英文内容
-- `content/zh/tools/` → 中文内容
 
 最小 `i18n/zh.toml` 示例：
 
@@ -172,8 +188,6 @@ other = "安装 Skill"
 ```
 
 主题共内置 189 个 i18n 键，完整列表见 [`i18n/en.toml`](./i18n/en.toml) 和 [`i18n/zh.toml`](./i18n/zh.toml)。
-
-页头与页脚的语言切换器通过 `data-lang-href` / `data-footer-lang-href` 属性实现，切换时保留当前页面路径。
 
 ## 参数说明
 
@@ -212,27 +226,9 @@ baseof.html          ← head、字体预加载、防闪烁 IIFE
   footer.html        ← 品牌信息、语言选择器
 ```
 
-工具控制面板通过 partial 注入：
-
-- `partials/tool-controls-wx-xhs-poster.html`
-- `partials/tool-controls-blog-cover.html`
-
 ## 说明
 
 - 无构建流程，无 Node.js 依赖，纯 Hugo + 原生 JS/CSS。
 - 主题偏好存储于 `localStorage` 的 `debuginn_tools_theme` 键，通过阻塞式 IIFE 在渲染前应用，避免闪烁。
-- Canvas 工具状态按工具类型分别持久化到 `localStorage`。
-- 不使用 Google Fonts，默认使用系统字体。
-- 可运行的演示站点位于 `exampleSite/`。
-
-## 主题文件
-
-- `layouts/`
-- `static/css/portal.css`
-- `static/css/wx-xhs-poster.css`
-- `static/css/blog-cover.css`
-- `static/js/portal.js`
-- `static/js/wx-xhs-poster.js`
-- `static/js/blog-cover.js`
-- `i18n/en.toml`
-- `i18n/zh.toml`
+- 首次访问时自动检测浏览器语言，中文用户将自动跳转至 `/zh/`。
+- 在线演示：[skills.debuginn.com](https://skills.debuginn.com)
