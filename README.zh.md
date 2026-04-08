@@ -1,4 +1,6 @@
-# hugo-theme-skills
+![hugo-theme-skills](https://github.com/user-attachments/assets/c958db24-d854-4a84-a610-9c6b5e9d5929)
+
+## hugo-theme-skills
 
 [![最低 Hugo 版本](https://img.shields.io/static/v1?label=min-HUGO-version&message=%3E%3Dv0.115.0&color=blue&logo=hugo)](https://github.com/gohugoio/hugo/releases/tag/v0.115.0)
 [![开源协议](https://img.shields.io/github/license/debuginn/hugo-theme-skills)](https://github.com/debuginn/hugo-theme-skills/blob/main/LICENSE)
