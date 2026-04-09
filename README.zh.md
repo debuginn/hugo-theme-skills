@@ -2,11 +2,12 @@
 
 # hugo-theme-skills
 
-[![最低 Hugo 版本](https://img.shields.io/static/v1?label=min-HUGO-version&message=%3E%3Dv0.115.0&color=blue&logo=hugo)](https://github.com/gohugoio/hugo/releases/tag/v0.115.0)
-[![开源协议](https://img.shields.io/github/license/debuginn/hugo-theme-skills)](https://github.com/debuginn/hugo-theme-skills/blob/main/LICENSE)
-[![示例站点](https://img.shields.io/badge/exampleSite-skills.debuginn.com-2b7bff)](https://skills.debuginn.com)
-[![多语言](https://img.shields.io/badge/i18n-EN%20%2F%20ZH-1f9d55)](#i18n)
-[![部署状态](https://github.com/debuginn/hugo-theme-skills/actions/workflows/deploy.yml/badge.svg)](https://github.com/debuginn/hugo-theme-skills/actions/workflows/deploy.yml)
+[![最低 Hugo 版本](https://img.shields.io/static/v1?label=min-HUGO-version&message=%3E%3Dv0.115.0&color=blue&logo=hugo&style=for-the-badge)](https://github.com/gohugoio/hugo/releases/tag/v0.115.0)
+[![开源协议](https://img.shields.io/github/license/debuginn/hugo-theme-skills?style=for-the-badge)](https://github.com/debuginn/hugo-theme-skills/blob/main/LICENSE)
+[![示例站点](https://img.shields.io/badge/示例站点-skills.debuginn.com-2b7bff?style=for-the-badge)](https://skills.debuginn.com)
+[![多语言](https://img.shields.io/badge/i18n-EN%20%2F%20ZH-1f9d55?style=for-the-badge)](#i18n)
+[![Telegram](https://img.shields.io/badge/Telegram-xiaoyupark-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/xiaoyupark)
+[![部署状态](https://img.shields.io/github/actions/workflow/status/debuginn/hugo-theme-skills/deploy.yml?style=for-the-badge&label=Deploy)](https://github.com/debuginn/hugo-theme-skills/actions/workflows/deploy.yml)
 
 [English](./README.md)
 
