@@ -6,7 +6,7 @@ cardIcon: '<svg class="tool-mark-logo" viewBox="0 0 256 256" fill="none" xmlns="
 installCode: "# 1. Add this marketplace\n/plugin marketplace add debuginn/skills\n# 2. Install skills\n/plugin install debuginn-skill-tool@debuginn-skills\n# 3. Reload to apply\n/reload-plugins"
 buttons: ["install"]
 githubRepo: "https://github.com/debuginn/hugo-theme-skills"
-tags: ["Skill Builder", "Claude", "Hugo Theme"]
+tags: ["Skill Builder", "Claude", "Hugo"]
 weight: 0
 ---
 
