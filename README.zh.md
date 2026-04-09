@@ -1,6 +1,6 @@
 ![hugo-theme-skills](https://github.com/user-attachments/assets/c958db24-d854-4a84-a610-9c6b5e9d5929)
 
-## hugo-theme-skills
+# hugo-theme-skills
 
 [![最低 Hugo 版本](https://img.shields.io/static/v1?label=min-HUGO-version&message=%3E%3Dv0.115.0&color=blue&logo=hugo)](https://github.com/gohugoio/hugo/releases/tag/v0.115.0)
 [![开源协议](https://img.shields.io/github/license/debuginn/hugo-theme-skills)](https://github.com/debuginn/hugo-theme-skills/blob/main/LICENSE)
@@ -130,16 +130,16 @@ cd exampleSite && hugo server
 
 工具内容位于 `tools` 分区，front matter 字段说明：
 
-| 字段 | 说明 |
-|------|------|
-| `toolType` | 指定加载的控制面板 partial 和 Canvas 资源 |
-| `toolCSS` / `toolJS` | 工具专属静态资源路径 |
-| `installCode` | 若存在，启用卡片翻转并在背面展示安装指令块 |
-| `buttons` | 控制卡片正面按钮的数组，可选值：`"open"`、`"install"`。默认为 `["open"]`（设置了 `installCode` 时自动加上 `"install"`）。纯技能卡片可设为 `["install"]`。 |
-| `openLabel` | 打开按钮的自定义文案，默认为 `"$ OpenTool"` |
-| `githubRepo` | GitHub 仓库地址，设置后在卡片右下角渲染圆形 GitHub 图标链接 |
-| `tags` | 标签数组，用于分类 |
-| `cardIcon` | 自定义内联 SVG 图标，未设置时回退到类型默认图标 |
+| 字段                 | 说明                                                                                                                                                      |
+| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `toolType`           | 指定加载的控制面板 partial 和 Canvas 资源                                                                                                                 |
+| `toolCSS` / `toolJS` | 工具专属静态资源路径                                                                                                                                      |
+| `installCode`        | 若存在，启用卡片翻转并在背面展示安装指令块                                                                                                                |
+| `buttons`            | 控制卡片正面按钮的数组，可选值：`"open"`、`"install"`。默认为 `["open"]`（设置了 `installCode` 时自动加上 `"install"`）。纯技能卡片可设为 `["install"]`。 |
+| `openLabel`          | 打开按钮的自定义文案，默认为 `"$ OpenTool"`                                                                                                               |
+| `githubRepo`         | GitHub 仓库地址，设置后在卡片右下角渲染圆形 GitHub 图标链接                                                                                               |
+| `tags`               | 标签数组，用于分类                                                                                                                                        |
+| `cardIcon`           | 自定义内联 SVG 图标，未设置时回退到类型默认图标                                                                                                           |
 
 工具 front matter 示例（`content/tools/my-tool.md`）：
 
@@ -195,28 +195,28 @@ other = "安装 Skill"
 
 ### `params`
 
-| 参数 | 说明 |
-|------|------|
-| `brandName` | 页头和页脚显示的品牌名称 |
-| `logoImage` | Logo 图片路径 |
-| `ogImage` | Open Graph 默认分享图路径 |
+| 参数            | 说明                               |
+| --------------- | ---------------------------------- |
+| `brandName`     | 页头和页脚显示的品牌名称           |
+| `logoImage`     | Logo 图片路径                      |
+| `ogImage`       | Open Graph 默认分享图路径          |
 | `twitterHandle` | Twitter/X 账号，用于 SEO meta 标签 |
-| `blogURL` | 导航栏外部博客链接 |
-| `githubURL` | GitHub 主页链接 |
-| `twitterURL` | Twitter/X 主页链接 |
-| `telegramURL` | Telegram 链接 |
-| `wechatQR` | 微信二维码图片路径 |
-| `copyright` | 页脚版权文案 |
-| `installCmd` | Hero 区域展示的安装命令 |
+| `blogURL`       | 导航栏外部博客链接                 |
+| `githubURL`     | GitHub 主页链接                    |
+| `twitterURL`    | Twitter/X 主页链接                 |
+| `telegramURL`   | Telegram 链接                      |
+| `wechatQR`      | 微信二维码图片路径                 |
+| `copyright`     | 页脚版权文案                       |
+| `installCmd`    | Hero 区域展示的安装命令            |
 
 ### `languages.<lang>.params`
 
-| 参数 | 说明 |
-|------|------|
-| `langHref` | 该语言的根路径（`/` 或 `/zh/`） |
-| `langLabel` | 语言切换器中显示的标签 |
-| `brandName` | 该语言专属品牌名称（覆盖全局设置） |
-| `siteDescription` | 该语言的页面 meta 描述 |
+| 参数              | 说明                               |
+| ----------------- | ---------------------------------- |
+| `langHref`        | 该语言的根路径（`/` 或 `/zh/`）    |
+| `langLabel`       | 语言切换器中显示的标签             |
+| `brandName`       | 该语言专属品牌名称（覆盖全局设置） |
+| `siteDescription` | 该语言的页面 meta 描述             |
 
 ## 布局结构
 

@@ -1,6 +1,6 @@
 ![hugo-theme-skills](https://github.com/user-attachments/assets/c958db24-d854-4a84-a610-9c6b5e9d5929)
 
-## hugo-theme-skills
+# hugo-theme-skills
 
 [![Minimum Hugo Version](https://img.shields.io/static/v1?label=min-HUGO-version&message=%3E%3Dv0.115.0&color=blue&logo=hugo)](https://github.com/gohugoio/hugo/releases/tag/v0.115.0)
 [![License](https://img.shields.io/github/license/debuginn/hugo-theme-skills)](https://github.com/debuginn/hugo-theme-skills/blob/main/LICENSE)
@@ -130,16 +130,16 @@ cd exampleSite && hugo server
 
 Tools live in the `tools` section. Front matter keys:
 
-| Key | Purpose |
-|-----|---------|
-| `toolType` | Selects which controls partial and canvas assets to load |
-| `toolCSS` / `toolJS` | Per-tool static asset paths |
-| `installCode` | If present, enables card flip and back-face install block |
-| `buttons` | Array controlling which buttons appear on the card. Values: `"open"`, `"install"`. Defaults to `["open"]` (plus `"install"` when `installCode` is set). Use `["install"]` for skill-only cards with no tool page. |
-| `openLabel` | Custom label for the open button; defaults to `"$ OpenTool"` |
-| `githubRepo` | GitHub URL; renders a circular GitHub icon link at the bottom-right of the card |
-| `tags` | Tag array for categorization |
-| `cardIcon` | Custom inline SVG icon; falls back to a type-based default icon |
+| Key                  | Purpose                                                                                                                                                                                                           |
+| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `toolType`           | Selects which controls partial and canvas assets to load                                                                                                                                                          |
+| `toolCSS` / `toolJS` | Per-tool static asset paths                                                                                                                                                                                       |
+| `installCode`        | If present, enables card flip and back-face install block                                                                                                                                                         |
+| `buttons`            | Array controlling which buttons appear on the card. Values: `"open"`, `"install"`. Defaults to `["open"]` (plus `"install"` when `installCode` is set). Use `["install"]` for skill-only cards with no tool page. |
+| `openLabel`          | Custom label for the open button; defaults to `"$ OpenTool"`                                                                                                                                                      |
+| `githubRepo`         | GitHub URL; renders a circular GitHub icon link at the bottom-right of the card                                                                                                                                   |
+| `tags`               | Tag array for categorization                                                                                                                                                                                      |
+| `cardIcon`           | Custom inline SVG icon; falls back to a type-based default icon                                                                                                                                                   |
 
 Example tool front matter (`content/tools/my-tool.md`):
 
@@ -195,28 +195,28 @@ The theme ships 189 i18n keys. See [`i18n/en.toml`](./i18n/en.toml) and [`i18n/z
 
 ### `params`
 
-| Key | Purpose |
-|-----|---------|
-| `brandName` | Brand name shown in the header and footer |
-| `logoImage` | Logo image path |
-| `ogImage` | Open Graph fallback image path |
-| `twitterHandle` | Twitter/X handle for SEO meta tags |
-| `blogURL` | External blog link in the nav |
-| `githubURL` | GitHub profile link |
-| `twitterURL` | Twitter/X profile link |
-| `telegramURL` | Telegram link |
-| `wechatQR` | WeChat QR code image path |
-| `copyright` | Copyright line in the footer |
-| `installCmd` | Install command shown in the hero block |
+| Key             | Purpose                                   |
+| --------------- | ----------------------------------------- |
+| `brandName`     | Brand name shown in the header and footer |
+| `logoImage`     | Logo image path                           |
+| `ogImage`       | Open Graph fallback image path            |
+| `twitterHandle` | Twitter/X handle for SEO meta tags        |
+| `blogURL`       | External blog link in the nav             |
+| `githubURL`     | GitHub profile link                       |
+| `twitterURL`    | Twitter/X profile link                    |
+| `telegramURL`   | Telegram link                             |
+| `wechatQR`      | WeChat QR code image path                 |
+| `copyright`     | Copyright line in the footer              |
+| `installCmd`    | Install command shown in the hero block   |
 
 ### `languages.<lang>.params`
 
-| Key | Purpose |
-|-----|---------|
-| `langHref` | Root path for this language (`/` or `/zh/`) |
-| `langLabel` | Label shown in the language switcher |
-| `brandName` | Language-specific brand name override |
-| `siteDescription` | Meta description for this language |
+| Key               | Purpose                                     |
+| ----------------- | ------------------------------------------- |
+| `langHref`        | Root path for this language (`/` or `/zh/`) |
+| `langLabel`       | Label shown in the language switcher        |
+| `brandName`       | Language-specific brand name override       |
+| `siteDescription` | Meta description for this language          |
 
 ## Layout Flow
 
