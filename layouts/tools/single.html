@@ -2,7 +2,13 @@
 
 {{ define "styles" }}
 <link rel="stylesheet" href="{{ "css/portal.css" | relURL }}" />
-{{ with .Params.toolCSS }}<link rel="stylesheet" href="{{ . | relURL }}" />{{ end }}
+{{- if .Params.toolCSS -}}
+  {{- if reflect.IsSlice .Params.toolCSS -}}
+    {{- range .Params.toolCSS }}<link rel="stylesheet" href="{{ . | relURL }}" />
+{{ end -}}
+  {{- else }}<link rel="stylesheet" href="{{ .Params.toolCSS | relURL }}" />
+{{ end -}}
+{{- end }}
 {{ end }}
 
 {{ define "main" }}
@@ -126,5 +132,11 @@
 
 {{ define "scripts" }}
 <script src="{{ "js/portal.js" | relURL }}"></script>
-{{ with .Params.toolJS }}<script src="{{ . | relURL }}"></script>{{ end }}
+{{- if .Params.toolJS -}}
+  {{- if reflect.IsSlice .Params.toolJS -}}
+    {{- range .Params.toolJS }}<script src="{{ . | relURL }}"></script>
+{{ end -}}
+  {{- else }}<script src="{{ .Params.toolJS | relURL }}"></script>
+{{ end -}}
+{{- end }}
 {{ end }}
