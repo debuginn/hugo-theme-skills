@@ -3,7 +3,7 @@
 {{ define "styles" }}
 <link rel="stylesheet" href="{{ "css/portal.css" | relURL }}" />
 {{- if .Params.toolCSS -}}
-  {{- if reflect.IsSlice .Params.toolCSS -}}
+  {{- if eq (printf "%T" .Params.toolCSS) "[]string" -}}
     {{- range .Params.toolCSS }}<link rel="stylesheet" href="{{ . | relURL }}" />
 {{ end -}}
   {{- else }}<link rel="stylesheet" href="{{ .Params.toolCSS | relURL }}" />
@@ -133,7 +133,7 @@
 {{ define "scripts" }}
 <script src="{{ "js/portal.js" | relURL }}"></script>
 {{- if .Params.toolJS -}}
-  {{- if reflect.IsSlice .Params.toolJS -}}
+  {{- if eq (printf "%T" .Params.toolJS) "[]string" -}}
     {{- range .Params.toolJS }}<script src="{{ . | relURL }}"></script>
 {{ end -}}
   {{- else }}<script src="{{ .Params.toolJS | relURL }}"></script>
