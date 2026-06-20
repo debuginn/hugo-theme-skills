@@ -6,7 +6,7 @@
 [![开源协议](https://img.shields.io/github/license/debuginn/hugo-theme-skills?style=for-the-badge)](https://github.com/debuginn/hugo-theme-skills/blob/main/LICENSE)
 [![示例站点](https://img.shields.io/badge/示例站点-skills.debuginn.com-2b7bff?style=for-the-badge)](https://skills.debuginn.com)
 [![多语言](https://img.shields.io/badge/i18n-EN%20%2F%20ZH-1f9d55?style=for-the-badge)](#i18n)
-[![Telegram](https://img.shields.io/badge/Telegram-xiaoyupark-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/xiaoyupark)
+[![Telegram](https://img.shields.io/badge/Telegram-xdebuginn-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/xdebuginn)
 [![部署状态](https://img.shields.io/github/actions/workflow/status/debuginn/hugo-theme-skills/deploy.yml?style=for-the-badge&label=Deploy)](https://github.com/debuginn/hugo-theme-skills/actions/workflows/deploy.yml)
 
 [English](./README.md)
