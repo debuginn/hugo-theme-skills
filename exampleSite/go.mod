@@ -2,4 +2,4 @@ module github.com/debuginn/hugo-theme-skills/exampleSite
 
 go 1.25.6
 
-require github.com/debuginn/hugo-theme-skills v0.0.0-20260827123810-223f344cacbf // indirect
+require github.com/debuginn/hugo-theme-skills v0.0.0-20260828141118-fedd051a928c // indirect
